@@ -1,0 +1,36 @@
+Run time analysis for each task in Project 0
+
+Task 0
+O(n)
+- The programme is required to import the CSV files.
+- As such the size of the file will linearly correlate with the computation required to read the file.
+- Extracting the nth element is constant and has no impact.
+
+Task 1
+O(n)
+- n = len(calls)+len(texts)
+- Again linear, based on the length of the two lists.
+- Though the lists were converted into sets in order to be more efficient.
+
+Task 2
+O(n)
+- Loops through a list, then sort the list.
+- The single for loop in linear.
+- The dictionary is then turned into a list of tuples and sorted.
+- Big O is linear as the sorting and the computation of the loop depend on the size of n.
+    However, my understanding is that sort is not linear, but as we care only about the upper bound
+    The for loop has a great impact on Big O
+
+Task 3
+O(n log n)
+- Looping through two lists, however, they are not nested, and therefore linear
+- The list is turned into a set and then sorted. This will have less impact computational than the two for loops
+    and therefore does not impact the upper bound
+- Sorting is log n (uses binary search)
+
+Task 4
+O(n log n)
+- I've been extremely inefficient, with four list comprehensions (two of each are on the same list)
+- However, as they're not nested, these are still linear, so 2n; n = len(calls.csv) + len(texts.csv)
+- Then sorting a fraction of the original list. I've excluded the n - {fraction} as it doesn't seem large enough.
+- Sorting is log n (uses binary search

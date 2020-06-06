@@ -1,0 +1,245 @@
+# Efficiency
+
+- [Efficiency](#efficiency)
+  - [Quantifying efficiency](#quantifying-efficiency)
+    - [The rate of increase](#the-rate-of-increase)
+  - [Big O Notation](#big-o-notation)
+    - [CS50 notes on Big O](#cs50-notes-on-big-o)
+    - [Examples](#examples)
+  - [Space efficiency](#space-efficiency)
+
+Efficiency != speed.
+
+We're considering (1) the time it will take to run and (2) the amount of space the program will require in memory.
+
+Often there will be a trade-off between the two, where you can design a program that runs faster by selecting a data structure that takes up more space—or vice versa.
+
+Efficiency == how well are you using the compute resources to get a job done.
+
+There are common algorithms (procedures or recipes) that can be applied to improve the efficiency of your code in certain situations.
+
+To be an effective problem solver, you'll need to develop the ability to look at a problem and identify different algorithms that could be used—and then contrast those algorithms to consider which will be more or less efficient.
+
+## Quantifying efficiency
+
+Both these functions add 200 to an input, but the first is extremely more efficient.
+
+In the first we're asking Python to perform addition twice, in the second we're asking a hundred times.
+
+```
+def some_function(n):
+    for i in range(2):
+        n += 100
+    return n
+
+def other_function(n):
+    for i in range(100):
+        n += 2
+    return n
+```
+
+One element they both have in common, is that the input does not change how many times we perform the addition.
+
+Whereas, something like this, are input will impact our efficiency;
+
+```
+def say_hello(n):
+    for i in range(n):
+        print("Hello!")
+```
+
+> As the input to an algorithm increases, the time required to run the algorithm may also increase.
+
+### The rate of increase
+
+Linear versus exponential
+
+Linear -> as the input increases, the number of lines executed increases by a proportional amount. __The rate of increase in complexity, or resources required, is constant.__
+
+However, let's look at;
+
+```
+def say_hello(n):
+    for i in range(n):
+        for i in range(n):
+            print("Hello!")
+```            
+
+This prints "Hello" $n^2$ times.
+
+This is what we would call a quadratic rate of increase.
+
+The _order_ or rate of increase in the run-time of an algorithm is an essential concept when designing algorithms.
+
+> Note, instead of saying "this relationship has a linear rate of increase", we could instead say, "the order of this relationship is linear".
+
+<img src="md_refs/1024px-Comparison_computational_complexity.svg.png" width="400">
+
+## Big O Notation
+
+"O" in the name refers to the order of the rate of increase.
+
+$O(n)$
+
+$n$ represents the length of the input to your function.
+
+$O(1)$ is just $O(0n + 1)$
+
+
+What we really care about is how many operations we're asking the processor to perform, not simply the number of lines.
+
+Different lines of code may demand very different numbers of operations from the computer's processor.
+
+Most of the time, when analyzing the efficiency of an algorithm, the most important thing to know is the order. In other words, we care a lot whether the algorithm's time-complexity has a linear order or a quadratic order (or some other order). 
+
+This means that very often (in fact, most of the time) when you are asked to analyze an algorithm, you can do so by making an approximation that significantly simplifies things.
+
+`4n^2 + 3n + 7` -> `n^2`
+
+
+### CS50 notes on Big O
+
+Big O is used to notate the upper bound running time of an algorithm 
+- Linear search - $O(n)$
+- Bubble sort - $O(n^2)$
+- Binary search - $O(\log n)$
+- Constant numbers of steps - $O(1)$
+
+Capital omega is used to notate the lower bound running time of an algorithm - $\Omega$
+- Linear search - $\Omega(1)$ - you could be lucky and find it straight away
+- Bubble sort - $\Omega(n)$ - you have to go through the sequence at least once
+
+When upper bound and lower bound are the same you can use Theta - $\Theta$
+
+Compare sorting algorithms performance: https://www.cs.usfca.edu/~galles/visualization/ComparisonSort.html
+
+Cheat sheet https://www.bigocheatsheet.com/
+
+Python complexities https://wiki.python.org/moin/TimeComplexity
+
+
+### Examples
+```
+# O(n)
+
+def say_hello(n):
+    for i in range(n):
+        print("Hello!")
+      
+```
+
+```
+# O(n^2)
+
+def Quad_Example(our_list):
+    for first_loop_item in our_list:
+        for second_loop_item in our_list:
+            print ("Items: {}, {}".format
+            (first_loop_item,second_loop_item))
+            
+  
+Quad_Example([1,2,3,4])
+
+%time
+```
+
+```
+# O(nlogn)
+
+def Log_Linear_Example(our_list):
+    
+    if len(our_list) < 2:
+        return our_list
+    
+    else:
+        mid = len(our_list)//2
+        left = our_list[:mid]
+        right = our_list[mid:]
+
+        Log_Linear_Example(left)
+        Log_Linear_Example(right)
+
+        i = 0
+        j = 0
+        k = 0
+
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                our_list[k]=left[i]
+                i+=1
+            else:
+                our_list[k]=right[j]
+                j+=1
+            k+=1
+
+        while i < len(left):
+            our_list[k]=left[i]
+            i+=1
+            k+=1
+
+        while j < len(right):
+            our_list[k]=right[j]
+            j+=1
+            k+=1
+        
+        return our_list
+
+Log_Linear_Example([56,23,11,90,65,4,35,65,84,12,4,0])
+
+%time
+```
+
+```
+# O(logn)
+
+def Logarithmic_Example(number):
+    if number == 0: 
+        return 0
+    
+    elif number == 1: 
+        return 1
+    
+    else: 
+        return Logarithmic_Example(number-1)
+        +Logarithmic_Example(number-2)
+
+    
+Logarithmic_Example(29)
+
+%time
+```
+
+```
+# O(1)
+
+def constant(x,y):
+
+    if True:
+        z = x + y
+
+   for i in range(10):
+        z+=i
+
+  return z
+
+    
+constant(29)
+
+%time
+```
+
+## Space efficiency
+
+When we refer to space complexity, we are talking about how efficient our algorithm is in terms of memory usage. This comes down to the datatypes of the variables we are using and their allocated space requirements.
+
+It is also important to note that we will be focusing on just the data space being used and not any of the environment or instructional space.
+
+Assume;
+
+| Type        | Storage size           |
+| ------------- |:-------------:|
+| char      | 1 byte |
+| bool      | 1 byte      |
+| int | 4 bytes      |
+| float | 4 bytes      |
+| double | 8 bytes      |
