@@ -1,0 +1,273 @@
+# Data structures
+
+When you write code to solve a problem, there will always be data involved.
+
+How you store or structure that data in the computer's memory can have a huge impact on what kinds of things you can do with it and how efficiently you can do those things.
+
+## Collections
+
+- A group of things
+- They don't have a particular order
+- They don't have to have objects of the same type
+
+Many data structures are extensions of collections, adding contraints and rules.
+
+### Lists
+
+- Lists have an order
+- Have no fixed length
+
+#### Arrays
+
+Arrays are the most common implementation of lists.
+<br> Some languages allow for different data types within an array.
+<br> Some languages arrays must be of a set size.
+<br> The big differentiator between an array and a list is that __arrays have indices, lists do not__.
+
+To understand this, it helps to know how arrays are stored in memory. When an array is created, it is always given some initial size—that is, the number of elements it should be able to hold (and how large each element is). The computer then finds a block of memory and sets aside the space for the array.
+
+Importantly, the space that gets set aside is one, continuous block. That is, all of the elements of the array are contiguous (adjacent, connected without a break), meaning that they are all next to one another in memory.
+
+In contrast, the elements of a list may or may not be next to one another in memory.
+<br>_Linked lists_ for example have each list item pointing to the next list them, but the items themselves may be scattered in different locations of memory.
+
+A Python list is essentially implemented like an array (specifically, it behaves like a dynamic array)
+
+Python Strings are Arrays. They are arrays of bytes representing unicode characters.
+
+The index in an array is like an address in memory
+
+<img src="md_refs/array-with-indexes.png" width="400">
+<br>
+<br>
+
+__Doing stuff with arrays__
+
+```
+Reversing a string
+
+# approach1
+str="Python" # initial string
+return str[len(str)::-1]  # slicing 
+
+# approach2
+str="Python" # initial string
+return ''.join(reversed(str))  # join
+```
+
+```
+Anagrams
+
+# strip() only removes leading and ending whitespace
+return sorted(str1.replace(' ','').lower()) == sorted(str2.replace(' ','').lower())
+```
+
+```
+Reverse the words in a sentence
+
+# approach1
+return ''.join([''.join(reversed(i)) + ' ' for i in our_string.split()]).strip()
+
+# approach2
+word_list = our_string.split(" ")
+
+for idx in range(len(word_list)):
+        word_list[idx] = word_list[idx][::-1]
+
+    return " ".join(word_list)
+```
+
+```
+"""
+In information theory, the Hamming distance between two strings of equal length is the number of positions at which the corresponding symbols are different.
+
+Calculate the Hamming distance for the following test cases.
+"""
+
+def hamming_distance(str1: str, str2: str) -> int:
+    hamming_distance = 0
+    if len(str1) != len(str2):
+        return None
+    else:
+        for i in range(len(str1)):
+            if str1[i] != str2[i]:
+                hamming_distance += 1
+    
+    return hamming_distance
+```
+
+### Linked lists
+
+In higher level programming languages there often isn't a distinction between arrays and linked lists.
+
+Whereas an array can be thought of as a set of elements that are stored in memory contiguously (one after the other, in sequence). 
+
+A linked list, tasks this one step further, the elements are not just stored in order but linked to one another (think of a paper chain). A linked list is an extension of a list and is not an array.
+
+<img src="md_refs/paperchain.jpeg" width="400">
+<br>
+<br>
+
+There no are indices in a linked list, it is categorised by its links. Each element has some notion of what the next element is, not how necessarily how long the list is, or where it is in the list.
+
+An array however, you know what the next element is by what the next index is.
+
+In an array you store the value and its index. In a linked list you store the value and "next" the memory location of the next item.
+
+A linked list has; (1) nodes and (2) references to the next node (rather than an index) and as such do not need to be stored continuously in memory.
+
+The first node is the `head`. The last node has a reference to `None`.
+
+Adding and removing elements from an array can be complicated, every element essentially "moves". Whereas this is much easier in a linked list.
+
+In linked lists you add an element by simply changing the `next` reference;
+
+> Note, you should always assign your next pointer to "2" to "6" before changing "8" from "6" to "2", otherwise you'll lose your reference._
+
+_Note, insertion takes constant time $O(n)$ as you're just shifting pointers, not iterating over every element in the list_
+
+<img src="md_refs/linkedlist1.png" width="400">
+<img src="md_refs/linkedlist2.png" width="400">
+<br>
+<br>
+
+__Doubly linked lists__
+
+Link to the next and previous element.
+
+<img src="md_refs/linkedlist3.png" width="400">
+<br>
+<br>
+
+__Implementing a linked list in Python__
+
+```
+class Node:
+    def __init__(self, value):
+        self.value = value  # date we want to assign to the node
+        self.next = None  # ref to next node in the list
+
+head = Node(2)  # 2 is the value we want to hold
+
+# adding a new element
+new_node = Node(1)  # we initialise the new node
+head.next = new_node  # we must store the new node as a ref to the previous node
+
+# really we should do it in one step
+head.next = Node(1)
+
+# we'll access nodes through their links, not directly
+print(head.next.value)
+```
+<br>
+<br>
+
+Our goal is to extend the list until it looks like this:
+
+<img src="md_refs/linkedlist4.png" width="400">
+
+```
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+head = Node(2)
+head.next = Node(1)
+head.next.next = Node(4)
+head.next.next.next = Node(3)
+head.next.next.next.next = Node(5)
+```
+
+What if we had a list with 1,000 nodes?
+```
+def traverse_linkedlist(head: Node) -> Node:
+    current_node = head
+
+    while current_node is not None:
+        print(current_node.value)
+        current_node = current_node.next
+```
+
+Creating a linked list using iteration
+```
+def create_linked_list(input_list):
+    head = None
+    for value in input_list:
+        if head is None:
+            head = Node(value)    
+        else:
+        # Move to the tail (the last node)
+            current_node = head
+            while current_node.next:
+                current_node = current_node.next
+        
+            current_node.next = Node(value)
+    return head
+```    
+```
+# a more efficient solution
+def create_linked_list_better(input_list):
+    
+    head = None
+    tail = None
+    
+    for value in input_list:
+        
+        if head is None:
+            head = Node(value)
+            tail = head # when we only have 1 node, head and tail refer to the same node
+        else:
+            tail.next = Node(value) # attach the new node to the `next` of tail
+            tail = tail.next # update the tail
+            
+    return head    
+```
+
+Usually you'll want to create a `LinkedList` class as a wrapper for the nodes themselves and to provide common methods that operate on the list. 
+
+For example you can implement an append method that adds a value to the end of the list. 
+
+_Note that if we're only tracking the head of the list, this runs in linear time_ -  $O(N)$  - since you have to iterate through the entire list to get to the tail node. However, prepending (adding to the head of the list) can be done in constant  $O(1)$ time. 
+
+```
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def append(self, value):
+        if self.head is None:
+            self.head = Node(value)
+            return
+
+        # Move to the tail (the last node)
+        node = self.head
+        while node.next:
+            node = node.next
+
+        node.next = Node(value)
+        return
+
+    def to_list(self):
+        out_list = []
+
+        node = self.head
+        while node:
+            out_list.append(node.value)
+            node = node.next
+
+        return out_list
+```
+
+Doubly linked list
+
+<img src="md_refs/linkedlist5.png" width="400">
+
+```
+class DoubleNode:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+        self.previous = None
+```
+
