@@ -1,3 +1,5 @@
+from typing import List
+
 class Node:
     def __init__(self, value):
         self.value = value  # date we want to assign to the node
@@ -55,9 +57,12 @@ def create_linked_list_better(input_list):
 
 
 class LinkedList:
-    def __init__(self):
+    def __init__(self, init_list: List=None):
         self.head = None
-    
+        if init_list:
+            for value in init_list:
+                self.append(value)
+
     #----------------------------------------------------#
 
     def prepend(self, value):
