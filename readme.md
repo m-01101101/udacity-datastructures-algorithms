@@ -11,6 +11,7 @@ If, like me, you have little background in programming or writing software, then
 One piece of advice I was given to build a natural programming workflow was to write out instructions for making a peanut butter and ~jelly~ jam sandwich.
 
 Here is my attempt. *I tried to think what these things would mean in terms of code, obviously they are nonsense and more for illustrative purposes.*
+
 (1) Get ingredients.
 
 ```python
@@ -53,7 +54,7 @@ smoothered_bread2 = spread(ingredient[2], sliced_bread2)
 
 (5) Construct sandwich. Place the two bits of bread together basically.
 
-final_sandwich = smoothered_bread1 + smoothered_bread2
+`final_sandwich = smoothered_bread1 + smoothered_bread2`
 
 We could go on, (6) serve, (7) eat...
 
@@ -78,3 +79,8 @@ This can be:
 The best way to build this skill is to build it like a muscle. Keeping on using it and flexing it over time
 
 Eventually you get faster and faster with more abstractions and more intuition around how to build something -- Todd Wolfson
+
+
+For a fun illustration, watch this.
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/cDA3_5982h8/0.jpg)](https://www.youtube.com/watch?v=cDA3_5982h8)
