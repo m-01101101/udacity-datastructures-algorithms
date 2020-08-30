@@ -12,8 +12,7 @@ head = Node(2)  # 2 is the value we want to hold
 new_node = Node(1)  # we initialise the new node
 head.next = new_node  # we must store the new node as a ref to the previous node
 
-# really we should do it in one step
-head.next = Node(1)
+head.next = Node(1)  # really we should do it in one step
 
 
 def traverse_linkedlist(head: Node) -> Node:
@@ -38,9 +37,8 @@ def create_linked_list(input_list):
             current_node.next = Node(value)
     return head
 
+
 # a more efficient solution
-
-
 def create_linked_list_better(input_list):
     head = None
     tail = None

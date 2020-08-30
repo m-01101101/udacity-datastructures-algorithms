@@ -35,7 +35,7 @@ def nth_row_pascal(n: int) -> List[int]:
     :param: - n - index (0 based)
     return - list() representing nth row of Pascal's triangle
     """
-
+    # TODO figure out is this is possible
     nth_row = list(range(n + 1))  # set length of nth row
     nth_row[0] = nth_row[-1] = 1  # set first and last to 1
 
@@ -47,13 +47,6 @@ def nth_row_pascal(n: int) -> List[int]:
     
     return nth_row
 
-# TODO
-# Build Pascal's triangle up to n rows
-# I thought it would be fun to build a nest array representing pascal's triangle
-
-# def construct_pascal(n: int) -> List[List[int]]:
-#     pascal = 'magic'
-#     return pascal
 
 def construct_pascal(n: int) -> Dict[int, List[int]]:
     pascal_triangle = {0: [1], 1: [1, 1], 2: [1, 2, 1], 3: [1, 3, 3, 1]}

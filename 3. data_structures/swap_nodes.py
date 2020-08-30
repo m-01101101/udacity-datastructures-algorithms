@@ -24,6 +24,8 @@ class Node:
         self.data = data
         self.next = None
 
+# TODO complete this
+
 """
 Approach
 As it's a linked list i need to consider how adjacent nodes handle this
