@@ -6,12 +6,12 @@ Returns: compound list: a list of all possible combinations of the input list
 """
 import copy # We will use `deepcopy()` function from the `copy` module
 
-def permute(inputList):
+def list_permutations(inputList):
     
     # a compound list
     finalCompoundList = []                  # compoundList to be returned 
     
-    # Terminaiton / Base condition
+    # Termination / Base condition
     if len(inputList) == 0:
         finalCompoundList.append([])
         
@@ -21,7 +21,7 @@ def permute(inputList):
         rest_list = inputList[after_first]  # convert the `slice` object into a list
         
         # Recursive function call
-        sub_compoundList = permute(rest_list)
+        sub_compoundList = list_permutations(rest_list)
         
         # Iterate through all lists of the compoundList returned from previous call
         for aList in sub_compoundList:
@@ -68,7 +68,7 @@ def check_output(output, expected_output):
     e.sort()
     return o == e
 
-print ("Pass" if  (check_output(permute([]), [[]])) else "Fail")
-print ("Pass" if  (check_output(permute([0]), [[0]])) else "Fail")
-print ("Pass" if  (check_output(permute([0, 1]), [[0, 1], [1, 0]])) else "Fail")
-print ("Pass" if  (check_output(permute([0, 1, 2]), [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]])) else "Fail")
+print ("Pass" if  (check_output(list_permutations([]), [[]])) else "Fail")
+print ("Pass" if  (check_output(list_permutations([0]), [[0]])) else "Fail")
+print ("Pass" if  (check_output(list_permutations([0, 1]), [[0, 1], [1, 0]])) else "Fail")
+print ("Pass" if  (check_output(list_permutations([0, 1, 2]), [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]])) else "Fail")
