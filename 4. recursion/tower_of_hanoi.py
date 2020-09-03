@@ -16,151 +16,65 @@ that prints the "move" steps in order to move num_disks number of disks
 
 Assume the disks are stacks currently from smallest first to largest at the bottom of a stack
 You have to re-stack them and then move onto destination
-
-num_disks = 3
-1. move disk from source to destination
-2. move disk from source to auxiliary
-3. move disk from destination to auxiliary
-4. move disk from source to destination
-5. move disk from auxiliary to source
-6. move disk from auxiliary to destination
-7. move disk from source to destination
-
-Print
-S D
-S A
-D A
-S D
-A S
-A D
-S D
-
-function
-1. arg1 - number of disks
-2. arg2 - rod A - this rod acts as the source 
-    (at the time of calling the function)
-2. arg3 - rod B - this rod acts as the auxiliary
-2. arg4 - rod C - this rod acts as the destination
 """
 
 def tower_of_Hanoi(num_disks):
     """
     :param: num_disks - number of disks
-    TODO: print the steps required to move all disks from source to destination
 
-    num_disks == 1. This must be the termination condition
+    d1    #        |        |
+    d2   ###       |        |
+    d3  #####      |        |
+    d4 #######     |        |
+         1         2        3
 
-    For num_disks > 1, just think of your FIRST set of steps. 
-    You want to pick the bottom most disk on the source, to be transferred to the destination. 
-    For this reason, you will will perform the steps below:
-    Step 1: Move num_disks - 1 from source to auxiliary
-    Step 2: Now you are left with only the largest disk at source. 
-    Move the only leftover disk from source to destination
-    Step 3: You had num_disks - 1 disks available on the auxiliary, as a result of Step 1. 
-    Move num_disks - 1 from auxiliary to destination
+    move (dn, current, target, other) ->
+    - move(dn - 1, current, other, target) 
+    - dn -> target
+    - move(dn - 1, other, current, target)
     """
 
-    """
-    treat each disk as a node
-    and each column as a stack
-    """
-    source = [d for d in range(1, num_disks + 1)][::-1]
+    return tower_of_Hanoi_func(num_disks, source = [d for d in range(1, num_disks + 1)][::-1], auxiliary = [], destination= [])
 
-    auxiliary = []
-
-    destination = []
-
-    return tower_of_Hanoi_func(num_disks, source, auxiliary, destination)
 
 def tower_of_Hanoi_func(num_disks, source, auxiliary, destination):
 
-    if len(source) == 1:  # base case
-        disk = source.pop()
-        destination.append(disk)
+    if num_disks == 1:  # base case
+        destination.append(source.pop())
+        print('S', 'D')
 
     else:
-        disk = source.pop()
-
-        if len(auxiliary) == 0 or disk < auxiliary[-1]:
-            auxiliary.append(disk)
-        elif disk < destination[-1]:
-            destination.append(disk)
-
-        if len(destination) != 0:
-            disk = destination.pop()
-            if disk < auxiliary[-1]:
-                auxiliary.append(disk)
-
-        if len(auxiliary) != 0:
-            disk = auxiliary.pop()
-            if disk < source[-1]:
-                source.append(disk)
-            elif disk < destination[-1]:
-                destination.append(disk)
-
-        tower_of_Hanoi_func(num_disks - 1, source, auxiliary, destination)
+        if num_disks % 2 != 0:
+            auxiliary.append(source.pop())
+            print('S', 'A')
+            auxiliary = destination + auxiliary
+            print('D', 'A') if len(destination) > 0 else None
+            destination = []
+        elif num_disks % 2 == 0:
+            destination.append(source.pop())
+            print('S', 'D')
+            destination = auxiliary + destination
+            print('A', 'D') if len(auxiliary) > 0 else None
+            auxiliary = []
+        return tower_of_Hanoi_func(num_disks - 1, source, auxiliary, destination)
     
 
     return source, auxiliary, destination
 
-    # FOR MARTJIN *UNPACKING GENERALLY - HOW DOES IT WORK
+
+# Udacity solution
+def tower_of_Hanoi_soln(num_disks, source, auxiliary, destination):
     
-
-# def binary_search(arr, target):
-#     return binary_search_func(arr, 0, len(arr) - 1, target)
-
-# def binary_search_func(arr, start_index, end_index, target):
-#     if start_index > end_index:
-#         return -1
-
-#     mid_index = (start_index + end_index)//2
-
-#     if arr[mid_index] == target:
-#         return mid_index
-#     elif arr[mid_index] > target:
-#         return binary_search_func(arr, start_index, mid_index - 1, target)
-#     else:
-#         return binary_search_func(arr, mid_index + 1, end_index, target)    
-
-
-
-
-# class LinkedListNode:
-
-#     def __init__(self, data):
-#         self.data = data
-#         self.next = None
-
-# class Stack:
-
-#     def __init__(self):
-#         self.num_elements = 0
-#         self.head = None
-
-#     def push(self, data):
-#         new_node = LinkedListNode(data)
-#         if self.head is None:
-#             self.head = new_node
-#         else:
-#             new_node.next = self.head
-#             self.head = new_node
-#         self.num_elements += 1
-
-#     def pop(self):
-#         if self.is_empty():
-#             return None
-#         temp = self.head.data
-#         self.head = self.head.next
-#         self.num_elements -= 1
-#         return temp
-
-#     def top(self):
-#         if self.head is None:
-#             return None
-#         return self.head.data
-
-#     def size(self):
-#         return self.num_elements
-
-#     def is_empty(self):
-#         return self.num_elements == 0
+    if num_disks == 0:
+        return
+    
+    if num_disks == 1:
+        print("{} {}".format(source, destination))
+        return
+    
+    tower_of_Hanoi_soln(num_disks - 1, source, destination, auxiliary)
+    print("{} {}".format(source, destination))
+    tower_of_Hanoi_soln(num_disks - 1, auxiliary, source, destination)
+    
+def tower_of_Hanoi(num_disks):
+    tower_of_Hanoi_soln(num_disks, 'S', 'A', 'D')
