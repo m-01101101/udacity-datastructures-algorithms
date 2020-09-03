@@ -4,6 +4,12 @@ Notes and work from Udacity's [Data Structure's and Algorithm's nanodegree](http
 
 At its core, this program is about how to write code to solve problems and to do so efficiently.
 
+Algorithms are the instructions, the things we want the computer to do. It's how we process the inputs and the outputs. Data structures are how these inputs and outputs are presented.
+
+> Inputs > Algorithms > Output
+ 
+The essence of a good algorithm is its ability to scale with the problem.
+
 ## On thinking
 
 If, like me, you have little background in programming or writing software, then it helps to have a way of thinking how to approach the task at hand. Staring at a blank ~canvas~ test editor can be daunting, you know the problem and have some intuition of how you'd solve the problem. However, converting that into code, the translation of thought to function, can be tricky.
@@ -24,10 +30,10 @@ ingredients = ['bread', 'peanut butter', 'jam']
 class Slicer:
     def __init__(self):
         self.knife
-    
+
     def slice
 
-knife = Slicer()    
+knife = Slicer()
 ```
 
 (3) Slice bread.
@@ -80,7 +86,6 @@ The best way to build this skill is to build it like a muscle. Keeping on using 
 
 Eventually you get faster and faster with more abstractions and more intuition around how to build something -- Todd Wolfson
 
-
-For a fun illustration, watch this.
+For a fun illustration, watch the video below. The point is, there is no room for ambiguity.
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/cDA3_5982h8/0.jpg)](https://www.youtube.com/watch?v=cDA3_5982h8)
