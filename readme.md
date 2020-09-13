@@ -1,3 +1,6 @@
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+<a href="https://github.com/psf/black/blob/master/LICENSE"><img alt="License: MIT" src="https://black.readthedocs.io/en/stable/_static/license.svg"></a>
+
 # Data Structures & Algorithms
 
 Notes and work from Udacity's [Data Structure's and Algorithm's nanodegree](https://www.udacity.com/courses/data-structures-and-algorithms-nanodegree)
@@ -7,7 +10,7 @@ At its core, this program is about how to write code to solve problems and to do
 Algorithms are the instructions, the things we want the computer to do. It's how we process the inputs and the outputs. Data structures are how these inputs and outputs are presented.
 
 > Inputs > Algorithms > Output
- 
+
 The essence of a good algorithm is its ability to scale with the problem.
 
 ## On thinking
