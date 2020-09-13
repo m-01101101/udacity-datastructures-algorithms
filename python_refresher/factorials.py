@@ -3,8 +3,8 @@ def prod(a: int, b: int) -> int:
 
 
 def fact_gen():
-    """ generates factorials for a number n
-    using a recursive function """
+    """generates factorials for a number n
+    using a recursive function"""
     i = 1
     n = i
     while True:

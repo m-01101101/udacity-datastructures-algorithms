@@ -11,18 +11,19 @@ Take a string as an input and return `True` if it's parentheses are balanced or 
 """
 from typing import List
 
+
 class Stack:
     def __init__(self):
         self.items = []
-    
+
     def size(self):
         return len(self.items)
-    
+
     def push(self, item):
         self.items.append(item)
 
     def pop(self):
-        if self.size()==0:
+        if self.size() == 0:
             return None
         else:
             return self.items.pop()
@@ -37,16 +38,16 @@ def equation_checker(equation):
     Returns:
        bool: Return if parentheses are balanced or not
     """
-    
+
     opening_parenthesis = Stack()
     closing_parenthesis = Stack()
 
     for _ in equation:
-        if _ == '(':
-           opening_parenthesis.push(_)
-        elif _ == ')':
-           closing_parenthesis.push(_)
-    
+        if _ == "(":
+            opening_parenthesis.push(_)
+        elif _ == ")":
+            closing_parenthesis.push(_)
+
     return opening_parenthesis.size() == closing_parenthesis.size()
 
 
@@ -54,9 +55,9 @@ def _equation_checker(equation):
     """
     Check equation for balanced parentheses
     """
-    
+
     # not in the the spirit
-    return equation.count('(') == equation.count(')')
+    return equation.count("(") == equation.count(")")
 
 
 def udacity_equation_checker(equation):

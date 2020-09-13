@@ -18,11 +18,14 @@ Example:
 * Swapping these nodes will result in a final order of nodes of `3 4 5 6 2 1 9`
 """
 
+
 class Node:
     """LinkedListNode class to be used for this problem"""
+
     def __init__(self, data):
         self.data = data
         self.next = None
+
 
 # TODO complete this
 
@@ -40,5 +43,7 @@ return: head of updated linked list with nodes swapped
 TODO: complete this function and swap nodes present at position_one and position_two
 Do not create a new linked list
 """
+
+
 def swap_nodes(head, left_index, right_index):
     pass

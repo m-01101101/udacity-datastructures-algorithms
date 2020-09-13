@@ -13,15 +13,16 @@ Once you decide that, you can use the append, pop or insert function to simulate
 We will choose the first element to be the front of our queue and therefore be using the append and pop functions to simulate it. Give it a try by implementing the function below!
 """
 
+
 class Queue:
     def __init__(self):
-         self.values = []
-    
+        self.values = []
+
     def size(self):
-         return len(self.values)
-    
+        return len(self.values)
+
     def enqueue(self, item):
-         self.values.append(item)
+        self.values.append(item)
 
     def dequeue(self):
         return self.value.pop(0)

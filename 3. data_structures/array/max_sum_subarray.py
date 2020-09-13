@@ -19,6 +19,7 @@ Will work poorly, if all numbers are negative.
 
 from typing import List
 
+
 def _max_sum_subarray1(arr: List[int]) -> int:
     """
     :param - arr - input array
@@ -27,17 +28,18 @@ def _max_sum_subarray1(arr: List[int]) -> int:
     running_total = 0
     placeholder = []
     placeholder.append(sum(arr))  # take into account total sum
-    
+
     for i in arr:
         if i > 0:
             running_total += i
         elif i < 0:
             placeholder.append(running_total)
             running_total = 0
-    
+
     placeholder.append(running_total)
 
     return max(placeholder)
+
 
 """
 The approach of handling negatives was too blunt
@@ -52,7 +54,7 @@ added to the next element, versus that element alone
 """
 
 # Solution
-'''
+"""
 The Idea:
 1. We have to find the sum of "contiguous" subarray, therefore we must not change the order of array elements.
 2. Let `current_sum` denotes the sum of a subarray, and `max_sum` denotes the maximum value of `current_sum`.
@@ -61,24 +63,25 @@ The Idea:
  - The element itself  (denotes the starting of a new subarray)
  - Update (overwrite) `max_sum`, if it is lower than the updated `current_sum`
 4. Return `max_sum`
-'''
+"""
+
 
 def max_sum_subarray(arr):
-    
-    current_sum = arr[0] # `current_sum` denotes the sum of a subarray
-    max_sum = arr[0]     # `max_sum` denotes the maximum value of `current_sum` ever
-    
+
+    current_sum = arr[0]  # `current_sum` denotes the sum of a subarray
+    max_sum = arr[0]  # `max_sum` denotes the maximum value of `current_sum` ever
+
     # Loop from VALUE at index position 1 till the end of the array
     for element in arr[1:]:
-        
-        '''
+
+        """
         # Compare (current_sum + element) vs (element)
         # If (current_sum + element) is higher, it denotes the addition of the element to the current subarray
         # If (element) alone is higher, it denotes the starting of a new subarray
-        '''
+        """
         current_sum = max(current_sum + element, element)
-        
+
         # (overwrite) `max_sum`, if it is lower than the updated `current_sum`
-        max_sum = max(current_sum, max_sum)   
-    
+        max_sum = max(current_sum, max_sum)
+
     return max_sum

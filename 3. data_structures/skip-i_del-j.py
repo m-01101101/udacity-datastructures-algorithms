@@ -16,11 +16,14 @@ class Node:
         self.data = data
         self.next = None
 
+
 # TODO complete this
 
 """
 Approach
 """
+
+
 def skip_i_delete_j(head, i, j):
     """
     :param: head - head of linked list

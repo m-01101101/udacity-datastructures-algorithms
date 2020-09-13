@@ -29,7 +29,7 @@ def duplicate_number(arr: List[int]) -> int:
 
 
 def udacity_duplicate_number(arr):
-    '''
+    """
     Notice carefully that
     1. All the elements of the array are always non-negative
     2. If array length = n, then elements would start from 0 to (n-2),
@@ -47,7 +47,7 @@ def udacity_duplicate_number(arr):
     current_sum  = 0 + 1 + 2 + 3 + .... + (n-2) + x
     expected_sum = 0 + 1 + 2 + 3 + .... + (n-2)
     current_sum - expected_sum = x
-    '''
+    """
     current_sum = 0
     expected_sum = 0
 
@@ -62,16 +62,15 @@ def udacity_duplicate_number(arr):
     for i in range(len(arr) - 1):
         expected_sum += i
 
-    # The difference between the 
+    # The difference between the
     return current_sum - expected_sum
-
 
 
 def multi_duplicates(arr: List[int]) -> List[int]:
     """
     another approach
     https://www.youtube.com/watch?v=aMsSF1Il3IY
-    each element in the array is a valid index 
+    each element in the array is a valid index
         (i-1, if the list was 1 to n not 0 to n)
     we loop through the list
     and make each value at the corresponding index 0
@@ -92,5 +91,6 @@ def multi_duplicates(arr: List[int]) -> List[int]:
 
     return dups
 
-array1 = [1,2,3,4,3,4,5,6,2,0]
+
+array1 = [1, 2, 3, 4, 3, 4, 5, 6, 2, 0]
 assert multi_duplicates(array1) == [3, 4, 2]

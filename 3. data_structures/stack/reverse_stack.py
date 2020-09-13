@@ -5,14 +5,14 @@ If your stack initially has `1, 2, 3, 4` (4 at the top and 1 at the bottom),
 after reversing the order must be `4, 3, 2, 1` (4 at the bottom and 1 at the top).
 """
 
-class LinkedListNode:
 
+class LinkedListNode:
     def __init__(self, data):
         self.data = data
         self.next = None
 
-class Stack:
 
+class Stack:
     def __init__(self):
         self.num_elements = 0
         self.head = None

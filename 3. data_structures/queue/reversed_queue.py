@@ -2,15 +2,14 @@
 Write a function that takes a queue as an inputs and returns a reversed version of it
 """
 
-class LinkedListNode:
 
+class LinkedListNode:
     def __init__(self, data):
         self.data = data
         self.next = None
 
 
 class Stack:
-
     def __init__(self):
         self.num_elements = 0
         self.head = None
@@ -43,9 +42,8 @@ class Stack:
     def is_empty(self):
         return self.num_elements == 0
 
-        
-class Queue:
 
+class Queue:
     def __init__(self):
         self.head = None
         self.tail = None
@@ -80,6 +78,7 @@ class Queue:
     def is_empty(self):
         return self.num_elements == 0
 
+
 def reversed_queue(queue):
     """
     Reverse the input queue
@@ -100,12 +99,11 @@ def reversed_queue(queue):
     return queue
 
 
-
 def test_function(test_case):
     queue = Queue()
     for num in test_case:
         queue.enqueue(num)
-    
+
     reverse_queue(queue)
     index = len(test_case) - 1
     while not queue.is_empty():
@@ -116,6 +114,7 @@ def test_function(test_case):
         else:
             index -= 1
     print("Pass")
+
 
 test_case_1 = [1, 2, 3, 4]
 test_function(test_case_1)

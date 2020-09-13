@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Node:
     def __init__(self, value):
         self.value = value  # date we want to assign to the node
@@ -46,7 +47,9 @@ def create_linked_list_better(input_list):
     for value in input_list:
         if head is None:
             head = Node(value)
-            tail = head  # when we only have 1 node, head and tail refer to the same node
+            tail = (
+                head  # when we only have 1 node, head and tail refer to the same node
+            )
         else:
             # attach the new node to the `next` of tail
             tail.next = Node(value)
@@ -55,13 +58,13 @@ def create_linked_list_better(input_list):
 
 
 class LinkedList:
-    def __init__(self, init_list: List=None):
+    def __init__(self, init_list: List = None):
         self.head = None
         if init_list:
             for value in init_list:
                 self.append(value)
 
-    #----------------------------------------------------#
+    # ----------------------------------------------------#
 
     def prepend(self, value):
         """ Prepend a value to the beginning of the list. """
@@ -71,8 +74,8 @@ class LinkedList:
             previous_head = self.head
             self.head = Node(value)
             self.head.next = previous_head
-    
-    #----------------------------------------------------#
+
+    # ----------------------------------------------------#
 
     def append(self, value):
         """ Append a value to the end of the list. """
@@ -87,7 +90,7 @@ class LinkedList:
 
             position_tail.next = Node(value)
 
-    #----------------------------------------------------#
+    # ----------------------------------------------------#
 
     def search(self, value):
         """ Search the linked list for a node with the requested value and return the node. """
@@ -103,7 +106,8 @@ class LinkedList:
         raise ValueError("Value not found in the list.")
 
         return None
-    #----------------------------------------------------#
+
+    # ----------------------------------------------------#
 
     def remove(self, value):
         """ Remove first occurrence of value. """
@@ -122,8 +126,8 @@ class LinkedList:
             node = node.next
 
         raise ValueError("Value not found in the list.")
-    
-    #----------------------------------------------------#
+
+    # ----------------------------------------------------#
 
     def pop(self):
         """ Return the first node's value and remove it from the list. """
@@ -131,12 +135,12 @@ class LinkedList:
         self.head = self.head.next
         return first_node.value
 
-    #----------------------------------------------------#
+    # ----------------------------------------------------#
 
     def insert(self, value, pos):
-        """ Insert value at pos position in the list. If pos is larger than the
-        length of the list, append to the end of the list. """
-    # If the list is empty
+        """Insert value at pos position in the list. If pos is larger than the
+        length of the list, append to the end of the list."""
+        # If the list is empty
         if self.head is None:
             self.head = Node(value)
             return
@@ -159,7 +163,7 @@ class LinkedList:
         else:
             self.append(value)
 
-    #----------------------------------------------------#
+    # ----------------------------------------------------#
 
     def size(self):
         """ Return the size or length of the linked list. """
@@ -171,7 +175,7 @@ class LinkedList:
 
         return size
 
-    #----------------------------------------------------#
+    # ----------------------------------------------------#
 
     def to_list(self):
         out = []
@@ -189,46 +193,48 @@ class DoubleNode:
         self.previous = None
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Test prepend
     linked_list = LinkedList()
     linked_list.prepend(1)
-    assert linked_list.to_list() == [
-        1], f"list contents: {linked_list.to_list()}"
+    assert linked_list.to_list() == [1], f"list contents: {linked_list.to_list()}"
     linked_list.append(3)
     linked_list.prepend(2)
-    assert linked_list.to_list() == [
-        2, 1, 3], f"list contents: {linked_list.to_list()}"
+    assert linked_list.to_list() == [2, 1, 3], f"list contents: {linked_list.to_list()}"
 
     # Test append
     linked_list = LinkedList()
     linked_list.append(1)
-    assert linked_list.to_list() == [
-        1], f"list contents: {linked_list.to_list()}"
+    assert linked_list.to_list() == [1], f"list contents: {linked_list.to_list()}"
     linked_list.append(3)
-    assert linked_list.to_list() == [
-        1, 3], f"list contents: {linked_list.to_list()}"
+    assert linked_list.to_list() == [1, 3], f"list contents: {linked_list.to_list()}"
 
     # Test search
     linked_list.prepend(2)
     linked_list.prepend(1)
     linked_list.append(4)
     linked_list.append(3)
-    assert linked_list.search(
-        1).value == 1, f"list contents: {linked_list.to_list()}"
-    assert linked_list.search(
-        4).value == 4, f"list contents: {linked_list.to_list()}"
+    assert linked_list.search(1).value == 1, f"list contents: {linked_list.to_list()}"
+    assert linked_list.search(4).value == 4, f"list contents: {linked_list.to_list()}"
 
     # Test remove
     linked_list.remove(1)
     assert linked_list.to_list() == [
-        2, 1, 3, 4, 3], f"list contents: {linked_list.to_list()}"
+        2,
+        1,
+        3,
+        4,
+        3,
+    ], f"list contents: {linked_list.to_list()}"
     linked_list.remove(3)
     assert linked_list.to_list() == [
-        2, 1, 4, 3], f"list contents: {linked_list.to_list()}"
+        2,
+        1,
+        4,
+        3,
+    ], f"list contents: {linked_list.to_list()}"
     linked_list.remove(3)
-    assert linked_list.to_list() == [
-        2, 1, 4], f"list contents: {linked_list.to_list()}"
+    assert linked_list.to_list() == [2, 1, 4], f"list contents: {linked_list.to_list()}"
 
     # Test pop
     value = linked_list.pop()
@@ -237,14 +243,22 @@ if __name__ == '__main__':
 
     # Test insert
     linked_list.insert(5, 0)
-    assert linked_list.to_list() == [
-        5, 1, 4], f"list contents: {linked_list.to_list()}"
+    assert linked_list.to_list() == [5, 1, 4], f"list contents: {linked_list.to_list()}"
     linked_list.insert(2, 1)
     assert linked_list.to_list() == [
-        5, 2, 1, 4], f"list contents: {linked_list.to_list()}"
+        5,
+        2,
+        1,
+        4,
+    ], f"list contents: {linked_list.to_list()}"
     linked_list.insert(3, 6)
     assert linked_list.to_list() == [
-        5, 2, 1, 4, 3], f"list contents: {linked_list.to_list()}"
+        5,
+        2,
+        1,
+        4,
+        3,
+    ], f"list contents: {linked_list.to_list()}"
 
     # Test size
     assert linked_list.size() == 5, f"list contents: {linked_list.to_list()}"

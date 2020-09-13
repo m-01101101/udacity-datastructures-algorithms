@@ -23,13 +23,12 @@ from typing import List
 
 
 class LinkedListNode:
-
     def __init__(self, data):
         self.data = data
         self.next = None
 
-class Stack:
 
+class Stack:
     def __init__(self):
         self.num_elements = 0
         self.head = None
@@ -74,20 +73,20 @@ def evaluate_post_fix(input_list: List[str]) -> int:
     """
 
     operators = {
-    '+' : operator.add,
-    '-' : operator.sub,
-    '*' : operator.mul,
-    '/' : operator.truediv,
-    '%' : operator.mod,
-    '^' : operator.xor,
-}
+        "+": operator.add,
+        "-": operator.sub,
+        "*": operator.mul,
+        "/": operator.truediv,
+        "%": operator.mod,
+        "^": operator.xor,
+    }
 
     stack = Stack()
 
     answer = 0
     for b in input_list:
         if b in operators.keys():
-            y = stack.pop() 
+            y = stack.pop()
             x = stack.pop()  # be aware of the reverse order, impacts division
 
             answer = int(operators[b](x, y))
@@ -101,22 +100,22 @@ def evaluate_post_fix(input_list: List[str]) -> int:
 def udacity_evaluate_post_fix(input_list):
     stack = Stack()
     for element in input_list:
-        if element == '*':
+        if element == "*":
             second = stack.pop()
             first = stack.pop()
             output = first * second
             stack.push(output)
-        elif element == '/':
+        elif element == "/":
             second = stack.pop()
             first = stack.pop()
             output = int(first / second)
             stack.push(output)
-        elif element == '+':
+        elif element == "+":
             second = stack.pop()
             first = stack.pop()
             output = first + second
             stack.push(output)
-        elif element == '-':
+        elif element == "-":
             second = stack.pop()
             first = stack.pop()
             output = first - second
@@ -130,13 +129,17 @@ def test_function(test_case):
     output = evaluate_post_fix(test_case[0])
     return output == test_case[1]
 
+
 test_case_1 = [["3", "1", "+", "4", "*"], 16]
 assert test_function(test_case_1) == True
 
 test_case_2 = [["4", "13", "5", "/", "+"], 6]
 assert test_function(test_case_2) == True
 
-test_case_3 = [["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"], 22]
+test_case_3 = [
+    ["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"],
+    22,
+]
 assert test_function(test_case_3) == True
 
 

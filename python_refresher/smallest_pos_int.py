@@ -6,6 +6,6 @@ def smallest_positive(in_list: list) -> int:
     #     for i in input:
     #         if i > 0:
     #             return i
-    
+
     # refactor
     return min([i for i in in_list if i > 0], default=None)

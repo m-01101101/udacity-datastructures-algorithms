@@ -1,5 +1,6 @@
 # Helper Code
 
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -81,6 +82,7 @@ for value in [4, 2, 5, 1, -3, 0]:
     llist.append(value)
 
 flipped = reverse(llist)
-is_correct = list(flipped) == list(
-    [0, -3, 1, 5, 2, 4]) and list(llist) == list(reverse(flipped))
+is_correct = list(flipped) == list([0, -3, 1, 5, 2, 4]) and list(llist) == list(
+    reverse(flipped)
+)
 print("Pass" if is_correct else "Fail")

@@ -15,6 +15,7 @@ If the brackets cannot be balanced, return `-1` to indicate that it is not possi
 # if sum if odd return -1
 # calculate number of reversals needed
 
+
 def _minimum_bracket_reversals(input_string):
     """
     Calculate the number of reversals to fix the brackets
@@ -27,23 +28,22 @@ def _minimum_bracket_reversals(input_string):
     # this is technically write,
     # however the task is looking for the bracket to follow one another {}
     # not if there are the same amount in each
-    a = input_string.count('{')
-    b = input_string.count('}')
+    a = input_string.count("{")
+    b = input_string.count("}")
 
     if (a + b) % 2 != 0:
         return -1
     else:
-        return abs((a - b)/2)
+        return abs((a - b) / 2)
 
 
 class LinkedListNode:
-
     def __init__(self, data):
         self.data = data
         self.next = None
 
-class Stack:
 
+class Stack:
     def __init__(self):
         self.num_elements = 0
         self.head = None
@@ -89,7 +89,7 @@ def udacity_minimum_bracket_reversals(input_string):
         else:
             top = stack.top()
             if top != bracket:
-                if top == '{':
+                if top == "{":
                     stack.pop()
                     continue
             stack.push(bracket)
@@ -100,11 +100,10 @@ def udacity_minimum_bracket_reversals(input_string):
         second = stack.pop()
         ls.append(first)
         ls.append(second)
-        if first == '}' and second == '}':
+        if first == "}" and second == "}":
             count += 1
-        elif first == '{' and second == '}':
+        elif first == "{" and second == "}":
             count += 2
-        elif first == '{' and second == '{':
+        elif first == "{" and second == "{":
             count += 1
     return count
-
