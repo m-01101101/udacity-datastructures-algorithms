@@ -9,7 +9,9 @@ Assume that duplicates are overwritten by the new node that is to be inserted.
 
 from config import Node
 
-
+# TODO compare with
+# https://github.com/TheAlgorithms/Python/blob/master/data_structures/binary_tree/binary_search_tree.py
+# https://github.com/TheAlgorithms/Python/blob/master/data_structures/binary_tree/binary_search_tree_recursive.py
 class BinaryTree:
     def __init__(self):
         self.root = None
@@ -22,18 +24,23 @@ class BinaryTree:
 
     def compare(self, node, new_node):
         """
-        0 means new_node equals node
-        -1 means new node less than existing node
-        1 means new node greater than existing node
+        The comparison operator is used for traversing the tree.
+        Determine the criteria that would make you go left versus right.
+        0: new_node == node
+        -1: new node < existing node
+        1: new node > existing node
         """
         if new_node.get_value() == node.get_value():
             return 0
         elif new_node.get_value() < node.get_value():
-            return -1
+            return -1  # traverse
         else:
             return 1
 
     def insert_with_loop(self, new_value):
+        # logic assumes working with integers
+        # change comparison operator if new criteria required
+        # adds to the right if larger than existing node, even if left available
         node = self.get_root()
         if node == None:
             self.set_root(new_value)
@@ -42,8 +49,7 @@ class BinaryTree:
         else:
             new_node = Node(new_value)
             inserted = False
-            # TODO - fix logic, so order of comparison doesn't matter
-            # currently, a value could be added right even when left available
+
             while not inserted:
                 comparison = self.compare(node, new_node)  # 0 equals match
                 if comparison == 0:
@@ -57,7 +63,6 @@ class BinaryTree:
                     else:
                         node.set_left_child(new_value)
                         inserted = True
-
                 elif comparison == 1:
                     if node.right != None:
                         node = node.get_right_child()
@@ -66,6 +71,8 @@ class BinaryTree:
                         inserted = True
 
     def insert_with_recursion(self, value):
+        # recursive fills up left first
+        # it does not use the comparison operator
         if self.get_root() == None:
             return self.set_root(value)
         elif self.get_root().get_value() == value:
@@ -88,6 +95,7 @@ class BinaryTree:
         add_recursively(node)
 
     def search(self, value):
+        # https://www.geeksforgeeks.org/insert-a-node-in-binary-search-tree-iteratively/
         """takes a value, and returns true if a node containing that value exists in the tree, otherwise false"""
         if value == self.get_root().get_value():
             return True
@@ -108,10 +116,10 @@ class BinaryTree:
     # TODO - add delete functions
     # https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
     # https://github.com/TheAlgorithms/Python/blob/master/data_structures/binary_tree/binary_search_tree.py
+    # https://www.youtube.com/watch?time_continue=15&v=fJlWvaqqeZg&feature=emb_logo
 
     def __repr__(self):
-        # this print function assumes the tree fills up from the left
-        # it will not display nodes to the right, if there is a None to the left on the same level
+        # TODO print "<empty>" for each node's children
         if self.get_root() == None:
             return "Tree is empty"
 

@@ -83,7 +83,7 @@ def pre_order_traversal_with_recursion(tree: Tree) -> List[str]:
 
     def recursive_logic(node):  # define the recursive logic, left first
 
-        if node != None:
+        if node != None:  # more Pythontic -> if node:
             visit_order.append(node.value)
             recursive_logic(node.get_left_child())
             recursive_logic(node.get_right_child())

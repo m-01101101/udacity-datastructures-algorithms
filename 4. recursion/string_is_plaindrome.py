@@ -31,8 +31,34 @@ def is_palindrome(input: str) -> bool:
         # recursive call, if first and last char are identical, else return False
         return (first == last) and is_palindrome(sub_input)
 
+def isPalindrome(s: str) -> bool:
+    """
+    Return True if all letters in s produce a palindrome, False otherwise.
+    """    
+    def _toChars(s):
+        s = s.lower()
+        letters = ''
+        for c in s:  # removes non letter characters
+            if c in 'abcdefghijklmnopqrstuvwyxyz':
+                letters += c
+        return letters
+
+    def _isPal(s):
+        if len(s) <= 1:
+            return True
+        else:
+            return s[0] == s[-1] and _isPal(s[1: -1])
+
+    return _isPal(_toChars(s))
+
 assert is_palindrome("") == True
 assert is_palindrome("a") == True
 assert is_palindrome("abba") == True
 assert is_palindrome("madam") == True
 assert is_palindrome("Udacity") == False
+
+assert isPalindrome("") == True
+assert isPalindrome("a") == True
+assert isPalindrome("abba") == True
+assert isPalindrome("madam") == True
+assert isPalindrome("Udacity") == False

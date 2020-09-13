@@ -32,6 +32,7 @@ class Queue:
 
 
 # BFS algorithm
+# TODO - double check this works
 def bfs(tree: Tree) -> List[str]:
     """Return items in tree, following pre-order traversal"""
     visit_order = list()
