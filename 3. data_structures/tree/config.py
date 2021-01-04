@@ -43,7 +43,7 @@ class Tree:
         return self.root
 
     def __repr__(self):
-        if self.get_root() == None:
+        if self.get_root() is None:
             return "Tree is empty"
 
         else:

@@ -31,7 +31,8 @@ class LRU_Cache(OrderedDict):
             return -1
 
     def set(self, key, value):
-        # Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item
+        # Set the value if the key is not present in the cache
+        # If the cache is at capacity remove the oldest item
         if len(self.cache) < self.capacity:
             self.cache[key] = value
         else:
@@ -39,6 +40,7 @@ class LRU_Cache(OrderedDict):
             self.cache[key] = value
 
 our_cache = LRU_Cache(5)
+
 
 our_cache.set(1, 1);
 our_cache.set(2, 2);

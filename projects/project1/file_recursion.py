@@ -33,8 +33,9 @@ def find_files(suffix: str, path: str) -> List[str]:
     for x in p.iterdir():
         if x.is_dir():
             p = x
-            files.extend(find_files(suffix, p))            
+            files.extend(find_files(suffix, p))
 
     return files
+
 
 paths = find_files(".c", "testdir")
