@@ -51,18 +51,14 @@ Phase 2 - Decoded the Data
     if the current bit is 1 move to the right child of the tree
     if a leaf node is encountered, append the (alphabetical) character of the leaf node to the decoded string
 (4) repeat (2) and (3) until the encoded data is completely traversed    
-"""
-
-"""
-use the template provided
 
 you will need to create the sizing schemas to present a summary
 """
-# import heapq  # python implemention of a min-heap
+import heapq  # python implemention of a min-heap
 import sys
 from collections import Counter
+from typing import List
 
-# creating a min-heap from scratch
 
 class Node:
     def __init__(self, char=None, freq=None):
@@ -71,49 +67,127 @@ class Node:
         self.left: Node = None
         self.right: Node = None
 
+    def __gt__(self, other):
+        if not isinstance(other, Node):
+            return -1
+        return self.freq > other.freq
+
     def __repr__(self):
         return f"{self.__class__.__name__}({self.char}, {self.freq})"
 
-    def __lt__(self, other):  # implementation of less than <
-        return self.freq < other.freq
 
-    def __gt__(self, other):  # implementation of greater than >
-        return self.freq > other.freq
+def merge_nodes(node1: Node, node2: Node) -> Node:
+    """
+    Combines the frequency of two nodes and makes them leafs nodes
+    """
+    output_node = Node(None, node1.freq + node2.freq)
 
+    if node2.freq >= node1.freq:
+        output_node.right = node2
+        output_node.left = node1
+    else:
+        output_node.right = node1
+        output_node.left = node2
 
-class MinHeap:
-    def __init__(self, root: int=None):
-        self.root = Node(root)
-
-    def build_heap(self, data):
-        encoded_data = Counter(data)
-        self.arr = [Node(char=letter, freq=encoded_data[letter]) for letter in encoded_data]
-
-
-def huffman_encoding(data):
-    return encoded_data, tree
+    return output_node
 
 
-def huffman_decoding(data,tree):
-    pass
+
+class HuffmanEncoder():
+    def __init__(self, data: str):
+        enc_data = Counter(data)
+        arr = [Node(char=letter, freq=enc_data[letter]) for letter in enc_data]
+        arr = sorted(arr, key=lambda x: x.freq)  # might need to change
+        self.frequency_list = arr
+
+        if len(arr) == 1:
+            node = heapq.heappop(arr)
+            huffman_node = Node(None, node.freq)
+            huffman_node.left = node
+            heapq.heappush(arr, huffman_node)
+
+        while len(arr) > 1:
+            node1 = arr.pop(0)
+            node2 = arr.pop(0)
+
+            huffman_node = merge_nodes(node1, node2)
+
+            heapq.heappush(arr, huffman_node)
+
+        self.root = arr[0]
+
+    def generate_codes(self):
+        if self.root.left is None and self.root.right is None:
+            return {self.root.char: "O"}
+
+        return self.code_recursive(self.root, "")
+
+    def code_recursive(self, root, current_code):
+        codes = {}
+
+        if root is None:
+            return {}
+
+        if root.char is not None:
+            codes[root.char] = current_code
+
+        codes.update(self.code_recursive(root.left, current_code + "0"))
+        codes.update(self.code_recursive(root.right, current_code + "1"))
+
+        return codes
+
+    def encode(self, data):
+        encoded_text = ""
+        codes = self.generate_codes()
+
+        for char in data:
+            encoded_text += codes[char]
+        return encoded_text
+
+    def decode(self, encoded_data: str, tree) -> str:
+        decoded_text = ""
+
+        current_node = tree
+
+        for char in encoded_data:
+            if char == '0':
+                current_node = current_node.left
+            else:
+                current_node = current_node.right
+
+            if current_node.char is not None:
+                decoded_text += current_node.char
+                current_node = tree
+        return decoded_text
+
+
+def huffman_encoding(data: str) -> (str, HuffmanEncoder):
+    encoder = HuffmanEncoder(data)
+
+    return encoder.encode(data), encoder.root
+
+
+def huffman_decoding(data: str, tree: Node) -> (str):
+    encoder = HuffmanEncoder(data)
+
+    return encoder.decode(data, tree)
+
 
 if __name__ == "__main__":
-    codes = {}
 
     a_great_sentence = "The bird is the word"
 
-    print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
-    print ("The content of the data is: {}\n".format(a_great_sentence))
+    print("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
+    print("The content of the data is: {}\n".format(a_great_sentence))
 
     encoded_data, tree = huffman_encoding(a_great_sentence)
 
-    print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
-    print ("The content of the encoded data is: {}\n".format(encoded_data))
+    print("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
+    print("The content of the encoded data is: {}\n".format(encoded_data))
 
     decoded_data = huffman_decoding(encoded_data, tree)
 
-    print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
-    print ("The content of the encoded data is: {}\n".format(decoded_data))
+    print("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
+    print("The content of the decoded data is: {}\n".format(decoded_data))
 
-
-message = 'AAAAAAABBBCCCCCCCDDEEEEEE'
+    assert a_great_sentence == decoded_data
