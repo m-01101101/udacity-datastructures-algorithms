@@ -21,7 +21,6 @@ class Huffman_Node:
 
 
 class Huffman_Coding:
-
     def encode(self, text):
         if text == "":
             return "", None
@@ -42,14 +41,14 @@ class Huffman_Coding:
         current_node = tree
 
         for char in encoded_text:
-            if char == '0':
+            if char == "0":
                 current_node = current_node.left
             else:
                 current_node = current_node.right
             if current_node.char is not None:
                 decoded_string += current_node.char
                 current_node = tree
-        return decoded_string  
+        return decoded_string
 
     def make_frequency_dict(self, text):
         frequency = {}
@@ -85,7 +84,7 @@ class Huffman_Coding:
 
     def make_codes(self, tree):
         if tree.left is None and tree.right is None:
-            return {tree.char:'0'}
+            return {tree.char: "0"}
         return self.make_codes_recursive(tree, "")
 
     def make_codes_recursive(self, root, current_code):
@@ -96,7 +95,7 @@ class Huffman_Coding:
 
         if root.char is not None:
             codes[root.char] = current_code
-        
+
         codes.update(self.make_codes_recursive(root.left, current_code + "0"))
         codes.update(self.make_codes_recursive(root.right, current_code + "1"))
         return codes
@@ -106,6 +105,7 @@ class Huffman_Coding:
         for char in text:
             encoded_text += codes[char]
         return encoded_text
+
 
 # if __name__ == "__main__":
 #     huffman_coding = Huffman_Coding()

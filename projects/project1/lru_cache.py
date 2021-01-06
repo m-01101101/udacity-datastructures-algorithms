@@ -16,6 +16,7 @@ For the current problem, you can consider the size of cache = 5
 
 from collections import OrderedDict
 
+
 class LRU_Cache(OrderedDict):
     def __init__(self, capacity):
         self.cache = OrderedDict()
@@ -39,20 +40,23 @@ class LRU_Cache(OrderedDict):
             self.cache.popitem(False)  # remove oldest item (left to right)
             self.cache[key] = value
 
+
 our_cache = LRU_Cache(5)
 
 
-our_cache.set(1, 1);
-our_cache.set(2, 2);
-our_cache.set(3, 3);
-our_cache.set(4, 4);
+our_cache.set(1, 1)
+our_cache.set(2, 2)
+our_cache.set(3, 3)
+our_cache.set(4, 4)
 
 
 assert our_cache.get(1) == 1
 assert our_cache.get(2) == 2
-assert our_cache.get(9) == -1   # 9 is not present in the cache
+assert our_cache.get(9) == -1  # 9 is not present in the cache
 
 our_cache.set(5, 5)
 our_cache.set(6, 6)
 
-assert our_cache.get(3) == -1   # returns -1 because the cache reached it's capacity and 3 was the least recently used entry
+assert (
+    our_cache.get(3) == -1
+)  # returns -1 because the cache reached it's capacity and 3 was the least recently used entry

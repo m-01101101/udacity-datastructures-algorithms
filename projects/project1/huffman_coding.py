@@ -92,8 +92,7 @@ def merge_nodes(node1: Node, node2: Node) -> Node:
     return output_node
 
 
-
-class HuffmanEncoder():
+class HuffmanEncoder:
     def __init__(self, data: str):
         enc_data = Counter(data)
         arr = [Node(char=letter, freq=enc_data[letter]) for letter in enc_data]
@@ -150,7 +149,7 @@ class HuffmanEncoder():
         current_node = tree
 
         for char in encoded_data:
-            if char == '0':
+            if char == "0":
                 current_node = current_node.left
             else:
                 current_node = current_node.right
@@ -182,7 +181,11 @@ if __name__ == "__main__":
 
     encoded_data, tree = huffman_encoding(a_great_sentence)
 
-    print("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
+    print(
+        "The size of the encoded data is: {}\n".format(
+            sys.getsizeof(int(encoded_data, base=2))
+        )
+    )
     print("The content of the encoded data is: {}\n".format(encoded_data))
 
     decoded_data = huffman_decoding(encoded_data, tree)

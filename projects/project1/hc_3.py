@@ -4,7 +4,6 @@ import collections
 
 
 class Node(object):
-
     def __init__(self, char=None, freq=None):
         self.char = char
         self.freq = freq
@@ -100,7 +99,7 @@ class Tree(object):
 
 class HuffmanEncoder(object):
     def __init__(self, tree: Tree):
-        self.table = self._create_encoding_table(base_code='', node=tree.root)
+        self.table = self._create_encoding_table(base_code="", node=tree.root)
         self.encode_dict = None
         self.decode_dict = None
 
@@ -137,7 +136,7 @@ class HuffmanEncoder(object):
         :param text: text to encode, same as used to construct Huffman Encoder
         :return: text encoded with Huffman algorithm
         """
-        coded_text = ''
+        coded_text = ""
         for char in text:
             coded_text += self.encode_dict[char]
 
@@ -149,7 +148,7 @@ class HuffmanEncoder(object):
         :param encoded_text: text to decoded, same as used to construct Huffman Encoder
         :return: text decoded with Huffman algorithm
         """
-        decoded_text = ''
+        decoded_text = ""
 
         while len(encoded_text) > 0:
             i_decoder = 1
@@ -174,7 +173,7 @@ class HuffmanEncoder(object):
             return [(node.char, base_code + str(node.freq))]
 
         if node.freq == -1:
-            current_code = ''
+            current_code = ""
         else:
             current_code = base_code + str(node.freq)
 
@@ -184,10 +183,14 @@ class HuffmanEncoder(object):
             coding_dict.append((node.char, current_code + str(node.freq)))
 
         if node.left is not None:
-            coding_dict.extend(HuffmanEncoder._create_encoding_table(current_code, node.left))
+            coding_dict.extend(
+                HuffmanEncoder._create_encoding_table(current_code, node.left)
+            )
 
         if node.right is not None:
-            coding_dict.extend(HuffmanEncoder._create_encoding_table(current_code, node.right))
+            coding_dict.extend(
+                HuffmanEncoder._create_encoding_table(current_code, node.right)
+            )
 
         return coding_dict
 
