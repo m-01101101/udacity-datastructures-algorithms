@@ -44,13 +44,15 @@ def is_user_in_group(user: str, group: Group) -> bool:
       user(str): user name/id
       group(class:Group): group to check user membership against
     """
-    # recursion?
     if user in group.get_users():
         return True
 
     else:
         groups = group.get_groups()
-        for group in groups:
-            is_user_in_group(group)
+        if len(groups) == 0:
+            return False
+        else:
+            for group in groups:
+                is_user_in_group(user, group)
 
     return False
