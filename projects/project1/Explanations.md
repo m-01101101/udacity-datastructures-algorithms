@@ -1,9 +1,11 @@
 # Explanations
 
 ## Problem 1: LRU Cache
+
 The `LRU_Cache` implemented inherits from an `OrderedDict`. This is a specialised dictionary that remembers the insertion order of keys. It is particularly useful in that it comes built in with a `move_to_end()` method. Each time a value is called using `LRU_Cache.get()` we are able to move the value to the right end of the cache. This means, when we `popitem()` we must include `False` so that the left end represents the least recently used item `(FIFO)`.
 
 ### Time complexity
+
 Operations will be $O(1)$ as we use a key to lookup values. Equally, if the cache hits capacity we just remove the most left item (`popitem(False)`).
 
 The `move_to_end()` method is also $O(1)$ as the length of the dictionary does not impact the time taken to move the element to the end [\[ref]][1]:
@@ -36,19 +38,22 @@ def move_to_end(self, key, last=True):
 ```
 
 ## Problem 2: File recursion
+
 Using Python’s built-in `pathlib` module allows for a more eloquent implementation of iterating through the directory `path.iterdir()` and checking the suffix of a file `file.suffix`
 
 ### Time complexity
 The `find_files` function is implemented recursively, checking all possible directories. As a result, the time complexity is linear $O(n)$, depending on the number of directories.
 
-The list returned is extended (appended would create a list of lists) each time there is a match, therefore it does not matter how many matches are found or have been found previously $O(1)$. 
+The list returned is extended (appended would create a list of lists) each time there is a match, therefore it does not matter how many matches are found or have been found previously $O(1)$.
 
 ## Problem 3: Huffman Coding
+
 When calling `huffman_decoding` I initialise another class of the `HuffmanEncoder`, this is perhaps inefficient but felt more in-line with the principles of functional programming.
 
 When merging nodes I used Python's built in min heap implementation `heapq`. This is because I sort the nodes in a list, and would have to create a copy of the list to then iterate and modify the list. Alternatively, I could have created a separate class specifically for merging the nodes, but this felt unnecessary. The `heapq` allowed me to bypass that step and create a min heap data structure whilst merging nodes.
 
 ### Time complexity
+
 All functions linear in time complexity;
 - Linear $O(n)$ when creating a frequency dictionary using `Counter` as dependent on the number of characters in the string.
 - Linear $O(n)$ when merging the nodes into a min heap structure, as dependent on the number of nodes.
@@ -56,12 +61,15 @@ All functions linear in time complexity;
 - Time complexity when encoding, and decoding having to work up and down the tree.
 
 ## Problem 4: Active Directory
+
 The program aims to reach the “best case” scenario as quickly as possible. Unlike problem 2, where we must check all possibilities, here we can exit as soon as the `True` criteria is met.
 
 ### Time complexity
+
 However, time complexity is based on “worst case”. The worst case would still require us checking every possibility in the directory. As a result time is linear $O(n)$ it depends directly on how many possible lists of users there are to explore.
 
 ## Problem 5: Blockchain
+
 The `Block` class provided in the template had no `next` attribute. I was unable to create a linked list successfully without this. The `next` attribute introduced, links directly to the next block, not simply a “next hash” as this could be a string and not pointing to the instance of the next block class in the linked list.
 
 The logic for appending a block only checks to see if the current block’s hash matches the already assigned `previous_hash` of the block being added. As a result, the new block would override the existing block and break the linked list.
