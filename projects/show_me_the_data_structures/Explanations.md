@@ -80,5 +80,16 @@ In order for this implementation to work, the `previous_hash` attribute of a blo
 
 ## Problem 6: Linked Lists
 
+I added a function with first converts the Linked List into a Python list, this allows me to iterate over the two linked lists provided. Alternatively, I could have implemented a `__next__` operator on the Linked List.
+
+I have made the assumption that `union` will include duplicates, whereas `intersection` should not, here I have used a Python set to ensure I only include elements in both Linked Lists.
+
+### Time complexity
+
+Converting Linked Lists to a Python list is linear $O(n)$ as I iterate over each element.
+
+`union` is $0(n)$ (really it's $2*O(n)$) as I convert both Linked Lists to a Python list, and then iterate over that Python list, one element at a time.
+
+`intersection` is $0(n)$, again converted Linked Lists to lists. Though the `set` operation will be much faster, the programme is still linearly dependent on the inputs.
 
 [1]:	https://github.com/python/cpython/blob/master/Lib/collections/__init__.py "cpython source code"
