@@ -7,6 +7,7 @@ authors = ["michael <michaelrogers.arsenal@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 rich = "^6.1.2"
+pytest = "^6.2.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.0.1"

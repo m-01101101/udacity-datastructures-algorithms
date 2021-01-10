@@ -7,6 +7,7 @@
  """
 
 import pathlib
+import pytest
 from typing import List
 
 
@@ -26,6 +27,9 @@ def find_files(suffix: str, path: str) -> List[str]:
     Returns:
        a list of paths
     """
+    if suffix == "":
+      raise ValueError("must provide suffix for file types to be returned")
+
     files = list()
     p = pathlib.Path(path)
     files = [f for f in p.iterdir() if f.suffix == suffix and f.is_file()]
@@ -38,4 +42,13 @@ def find_files(suffix: str, path: str) -> List[str]:
     return files
 
 
-paths = find_files(".c", "testdir")
+c_files = find_files(".c", "testdir")
+h_files = find_files(".h", "testdir/subdir1")
+
+assert len(c_files) == 4
+assert len(h_files) == 1
+
+
+def test_suffix_exception():
+    with pytest.raises(Exception):
+        assert find_files("", "testdir")  # do not accept no suffix

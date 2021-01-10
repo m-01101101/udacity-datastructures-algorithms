@@ -13,7 +13,7 @@ All operations must take O(1) time.
 
 For the current problem, you can consider the size of cache = 5
 """
-
+import pytest
 from collections import OrderedDict
 
 
@@ -32,9 +32,11 @@ class LRU_Cache(OrderedDict):
             return -1
 
     def set(self, key, value):
+        if self.capacity == 0:
+            raise KeyError("cache has a capacity of 0, please reset")
         # Set the value if the key is not present in the cache
         # If the cache is at capacity remove the oldest item
-        if len(self.cache) < self.capacity:
+        elif len(self.cache) < self.capacity:
             self.cache[key] = value
         else:
             self.cache.popitem(False)  # remove oldest item (left to right)
@@ -60,3 +62,13 @@ our_cache.set(6, 6)
 assert (
     our_cache.get(3) == -1
 )  # returns -1 because the cache reached it's capacity and 3 was the least recently used entry
+
+
+# edge case
+test_cache = LRU_Cache(0)
+
+
+def test_cache_exception():
+    """test that exception is raised for capacity of 0"""
+    with pytest.raises(Exception):
+        assert test_cache.set(1, 23)  # cache has capacity of zero
