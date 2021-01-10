@@ -82,7 +82,7 @@ In order for this implementation to work, the `previous_hash` attribute of a blo
 
 I added a function with first converts the Linked List into a Python list, this allows me to iterate over the two linked lists provided. Alternatively, I could have implemented a `__next__` operator on the Linked List.
 
-I have made the assumption that `union` will include duplicates, whereas `intersection` should not, here I have used a Python set to ensure I only include elements in both Linked Lists.
+I have used a Python set for both `union` and `intersection` to ensure duplicate values are not returned.
 
 ### Time complexity
 
