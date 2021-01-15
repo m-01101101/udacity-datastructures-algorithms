@@ -1,6 +1,5 @@
-import copy
 import math
-from typing import List
+from typing import List, Tuple
 
 # iterative solution
 def binary_search(array: List, target: int) -> int:
@@ -36,7 +35,6 @@ def binary_search(array: List, target: int) -> int:
     return -1
 
 
-# recursive solution
 def binary_search_recursive(array, target):
     """binary search algorithm using recursion
 
@@ -57,30 +55,49 @@ def binary_search_recursive_soln(array, target, start_index, end_index):
     if array[idx] == target:
         return idx
 
-    elif start_index > end_index or start_index == end_index == 0:
+    elif start_index > end_index:
         return -1
 
     elif array[idx] < target:
-        binary_search_recursive_soln(array, target, idx, end_index)
+        return binary_search_recursive_soln(
+            array, target, idx + 1, end_index
+        )  # must increment otherwise stuck in recursive loop for values greater than the largest value
 
     elif array[idx] > target:
-        binary_search_recursive_soln(array, target, start_index, idx)
+        return binary_search_recursive_soln(
+            array, target, start_index, idx - 1
+        )  # must increment otherwise stuck in recursive loop for small values
 
 
-def recursive_binary_search(target, source, left=0):
-    if len(source) == 0:
-        return None
-    centre = (len(source) - 1) // 2
-    if source[centre] == target:
-        return centre
-    elif source[centre] < target:
-        return recursive_binary_search(target, source[centre + 1 :], left + centre + 1)
-    else:
-        return recursive_binary_search(target, source[:centre], left)
+test_list = [1, 3, 5, 7, 7, 7, 8, 11, 12, 13, 14, 15]
+assert binary_search_recursive(test_list, 7) == 5
+assert binary_search_recursive(test_list, 3) == 1
+assert binary_search_recursive(test_list, 2) == -1
+assert binary_search_recursive(test_list, 15) == 11
+assert binary_search_recursive(test_list, 23) == -1
+
+
+def recursive_binary_search(array, target, left=0):
+    if len(array) == 0:
+        return -1
+
+    idx = (len(array) - 1) // 2
+    if array[idx] == target:
+        return idx + left
+    elif array[idx] < target:
+        return recursive_binary_search(
+            array[idx + 1 :], target, left + idx + 1
+        )  # search right side
+    elif array[idx] > target:
+        return recursive_binary_search(array[:idx], target, left)  # search left side
 
 
 multiple = [1, 3, 5, 7, 7, 7, 8, 11, 12, 13, 14, 15]
-assert recursive_binary_search(7, multiple) == 5
+assert recursive_binary_search(multiple, 7) == 5
+assert recursive_binary_search(multiple, 3) == 1
+assert recursive_binary_search(multiple, 2) == -1
+assert recursive_binary_search(multiple, 15) == 11
+assert recursive_binary_search(multiple, 23) == -1
 
 """
 ** variation 1 **
@@ -92,33 +109,47 @@ we might want to find the first instance
 """
 
 
-def find_first(target, source):
-    output = []
-    temp = copy.deepcopy(source)
-    for i in range(len(temp)):
-        idx = recursive_binary_search(target, temp)
-        if idx:  # equiv is not None
-            output.append(idx)  # + i?
-            temp.pop(idx)
-    return None if len(output) == 0 else min(output)
-
-
-# better approach
-def _find_first(target, source):
-    index = recursive_binary_search(target, source)
-    if not index:
-        return None
-    while source[index] == target:
+def _find_first(array, target):
+    index = recursive_binary_search(array, target)
+    if index == -1:
+        return -1
+    while array[index] == target:
         if index == 0:
             return 0
-        if source[index - 1] == target:
+        if array[index - 1] == target:
             index -= 1
         else:
             return index
 
 
-assert find_first(7, multiple) == 3
-assert find_first(9, multiple) == None
+assert _find_first(multiple, 7) == 3
+assert _find_first(multiple, 9) == -1
+assert _find_first(multiple, 2) == -1
+test_list1 = [1, 3, 5, 7, 7, 7, 8, 11, 12, 13, 14, 15, 22, 22]
+assert _find_first(test_list1, 22) == 12
+
+
+# replication if _find_fast but increments by +1
+def _find_last(array, target):
+    index = recursive_binary_search(array, target)
+    if index == -1:
+        return -1
+    while array[index] == target:
+        if index == 0:
+            return 0
+        elif index == len(array) - 1:  # added to handle IndexError
+            return index
+        elif array[index + 1] == target:
+            index += 1
+        else:
+            return index
+
+
+assert _find_last(multiple, 7) == 5
+assert _find_last(multiple, 9) == -1
+assert _find_last(multiple, 2) == -1
+assert _find_last(test_list1, 22) == 13
+
 
 """
 ** variation 2 **
@@ -128,13 +159,13 @@ but with no information about the location of that element
 """
 
 
-def contains(target, source):
-    return True if recursive_binary_search(target, source) is not None else False
+def contains(array, target):
+    return True if recursive_binary_search(array, target) != -1 else False
 
 
 letters = ["a", "c", "d", "f", "g"]
-assert contains("a", letters) == True
-assert contains("b", letters) == False
+assert contains(letters, "a") == True
+assert contains(letters, "b") == False
 
 """
 ** variation 3 **
@@ -149,33 +180,7 @@ The expected complexity of the problem is O(log(n))
 """
 
 
-def _find_first(target, source):
-    index = recursive_binary_search(target, source)
-    if not index:
-        return -1
-    while source[index] == target:
-        if index == 0:
-            return 0
-        if source[index - 1] == target:
-            index -= 1
-        else:
-            return index
-
-
-def _find_last(target, source):
-    index = recursive_binary_search(target, source)
-    if not index:
-        return -1
-    while source[index] == target:
-        if index == 0:
-            return 0
-        if source[index + 1] == target:
-            index += 1
-        else:
-            return index
-
-
-def first_and_last_index(target, source):
+def first_and_last_index(array, target) -> Tuple[int, int]:
     """
     Given a sorted array that may have duplicate values, use binary
     search to find the first and last indexes of a given value.
@@ -184,43 +189,39 @@ def first_and_last_index(target, source):
         arr(list): Sorted array (or Python list) that may have duplicate values
         number(int): Value to search for in the array
     Returns:
-        a list containing the first and last indexes of the given value
+        a tuple containing the first and last indexes of the given value
     """
-    return [idx for idx in (_find_first(target, source), _find_last(target, source))]
+    return (_find_first(array, target), _find_last(array, target))
 
 
 def test_first_list(test_case):
     input_list = test_case[0]
     number = test_case[1]
     solution = test_case[2]
-    output = first_and_last_index(number, input_list)
+    output = first_and_last_index(input_list, number)
     return output == solution
 
 
 input_list = [1]
 number = 1
-solution = [0, 0]
-print(solution, first_and_last_index(number, input_list))
-# test_case_1 = [number, input_list, solution]
-# assert test_first_list(test_case_1)
+solution = (0, 0)
+test_case_1 = [input_list, number, solution]
+assert test_first_list(test_case_1)
 
 input_list = [0, 1, 2, 3, 3, 3, 3, 4, 5, 6]
 number = 3
-solution = [3, 6]
-print(solution, first_and_last_index(number, input_list))
-# test_case_2 = [number, input_list, solution]
-# assert test_first_list(test_case_2)
+solution = (3, 6)
+test_case_2 = [input_list, number, solution]
+assert test_first_list(test_case_2)
 
 input_list = [0, 1, 2, 3, 4, 5]
 number = 5
-solution = [5, 5]
-print(solution, first_and_last_index(number, input_list))
-# test_case_3 = [number, input_list, solution]
-# assert test_first_list(test_case_3)
+solution = (5, 5)
+test_case_3 = [input_list, number, solution]
+assert test_first_list(test_case_3)
 
 input_list = [0, 1, 2, 3, 4, 5]
 number = 6
-solution = [-1, -1]
-print(solution, first_and_last_index(number, input_list))
-# test_case_4 = [number, input_list, solution]
-# assert test_first_list(test_case_4)
+solution = (-1, -1)
+test_case_4 = [input_list, number, solution]
+assert test_first_list(test_case_4)
