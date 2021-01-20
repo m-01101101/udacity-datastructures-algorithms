@@ -2,7 +2,7 @@
 import re
 import csv
 
-with open('texts.csv', 'r') as f:
+with open("texts.csv", "r") as f:
     # columns = [sending telephone number(string),
     #           receiving telephone number(string),
     #           timestamp of text message(string)]
@@ -10,7 +10,7 @@ with open('texts.csv', 'r') as f:
     texts = list(reader)
     texts_t = sorted([tuple(i) for i in texts], key=lambda text: text[2])
 
-with open('calls.csv', 'r') as f:
+with open("calls.csv", "r") as f:
     # columns = [calling telephone number(string),
     #           receiving telephone number(string),
     #           start timestamp of telephone call(string),
@@ -38,7 +38,9 @@ unique_texters = [i[0] for i in texts_t]
 unique_texters.extend([i[1] for i in texts_t])
 unique_texters.extend([i[1] for i in calls_t])
 # tried this as a generator but didn't keep values unique, seems inefficient
-telemarketers = [re.sub('[() ]', '', i[0]) for i in calls_t if i[0] not in set(unique_texters)]
+telemarketers = [
+    re.sub("[() ]", "", i[0]) for i in calls_t if i[0] not in set(unique_texters)
+]
 
-print('These numbers could be telemarketers: ')
+print("These numbers could be telemarketers: ")
 print(*sorted(set(telemarketers)), sep="\n")

@@ -18,6 +18,7 @@ Assume the disks are stacks currently from smallest first to largest at the bott
 You have to re-stack them and then move onto destination
 """
 
+
 def tower_of_Hanoi(num_disks):
     """
     :param: num_disks - number of disks
@@ -29,52 +30,57 @@ def tower_of_Hanoi(num_disks):
          1         2        3
 
     move (dn, current, target, other) ->
-    - move(dn - 1, current, other, target) 
+    - move(dn - 1, current, other, target)
     - dn -> target
     - move(dn - 1, other, current, target)
     """
 
-    return tower_of_Hanoi_func(num_disks, source = [d for d in range(1, num_disks + 1)][::-1], auxiliary = [], destination= [])
+    return tower_of_Hanoi_func(
+        num_disks,
+        source=[d for d in range(1, num_disks + 1)][::-1],
+        auxiliary=[],
+        destination=[],
+    )
 
 
 def tower_of_Hanoi_func(num_disks, source, auxiliary, destination):
 
     if num_disks == 1:  # base case
         destination.append(source.pop())
-        print('S', 'D')
+        print("S", "D")
 
     else:
         if num_disks % 2 != 0:
             auxiliary.append(source.pop())
-            print('S', 'A')
+            print("S", "A")
             auxiliary = destination + auxiliary
-            print('D', 'A') if len(destination) > 0 else None
+            print("D", "A") if len(destination) > 0 else None
             destination = []
         elif num_disks % 2 == 0:
             destination.append(source.pop())
-            print('S', 'D')
+            print("S", "D")
             destination = auxiliary + destination
-            print('A', 'D') if len(auxiliary) > 0 else None
+            print("A", "D") if len(auxiliary) > 0 else None
             auxiliary = []
         return tower_of_Hanoi_func(num_disks - 1, source, auxiliary, destination)
-    
 
     return source, auxiliary, destination
 
 
 # Udacity solution
 def tower_of_Hanoi_soln(num_disks, source, auxiliary, destination):
-    
+
     if num_disks == 0:
         return
-    
+
     if num_disks == 1:
         print("{} {}".format(source, destination))
         return
-    
+
     tower_of_Hanoi_soln(num_disks - 1, source, destination, auxiliary)
     print("{} {}".format(source, destination))
     tower_of_Hanoi_soln(num_disks - 1, auxiliary, source, destination)
-    
+
+
 def tower_of_Hanoi(num_disks):
-    tower_of_Hanoi_soln(num_disks, 'S', 'A', 'D')
+    tower_of_Hanoi_soln(num_disks, "S", "A", "D")

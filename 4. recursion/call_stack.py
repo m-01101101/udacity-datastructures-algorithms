@@ -27,13 +27,15 @@ print_integers(4) calls print_integers(3)
   print_integers(3) ends
 print_integers(4) calls print_integers(2)
   and so on...
-"""  
+"""
+
 
 def print_integers(n):
     print(n)
     if n > 1:
         n -= 1
         print_integers(n)
+
 
 """
 print_integers(4) calls print_integers(3)
@@ -43,7 +45,7 @@ print_integers(4) calls print_integers(3)
     print_integers(2) ends
   print_integers(3) ends
 print_integers(4) ends
-"""        
+"""
 
 # udacity
 def _print_integers(n):
@@ -52,8 +54,9 @@ def _print_integers(n):
     print(n)
     print_integers(n - 1)
 
+
 # more pythonic?
 def __print_integers(n):
     if n > 0:
         print(n)
-        print_integers(n - 1)    
+        print_integers(n - 1)

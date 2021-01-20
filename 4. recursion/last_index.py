@@ -11,6 +11,7 @@ For arr = [1, 2, 5, 5, 1, 2, 5, 4] and target = 7, output = -1
 """
 from typing import List
 
+
 def last_index(arr: List[int], target: int) -> int:
     """
     :param: arr - input array
@@ -19,7 +20,7 @@ def last_index(arr: List[int], target: int) -> int:
     """
     if target not in arr:
         return -1
-    
+
     else:
         rev_arr = arr[:][::-1]
         location = len(arr) - 1

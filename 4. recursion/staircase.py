@@ -24,19 +24,19 @@ Return number of possible ways in which you can climb the staircase
 """
 # not right
 def staircase(n):
-    
+
     if n == 1:
         return 1
 
     else:
         output = 0
-        
+
         for i in range(1, n):
             # output.append([i % n + 1] * (n + 1 // i))
             # output.append([i % n] * (n // i))
-            output += (n // (i % n))
+            output += n // (i % n)
 
-        staircase(n-1)
+        staircase(n - 1)
 
     return output
 
@@ -57,4 +57,3 @@ def udacity_staircase(n):
         climb_ways += staircase(n - 3)
 
         return climb_ways
-

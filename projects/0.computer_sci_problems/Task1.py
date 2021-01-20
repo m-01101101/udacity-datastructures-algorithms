@@ -1,6 +1,6 @@
 import csv
 
-with open('texts.csv', 'r') as f:
+with open("texts.csv", "r") as f:
     # columns = [sending telephone number(string),
     #           receiving telephone number(string),
     #           timestamp of text message(string)]
@@ -8,7 +8,7 @@ with open('texts.csv', 'r') as f:
     texts = list(reader)
     texts_t = sorted([tuple(i) for i in texts], key=lambda text: text[2])
 
-with open('calls.csv', 'r') as f:
+with open("calls.csv", "r") as f:
     # columns = [calling telephone number(string),
     #           receiving telephone number(string),
     #           start timestamp of telephone call(string),
@@ -27,5 +27,4 @@ unique_n_calls = set(i[0] for i in calls_t).union(set(i[1] for i in calls_t))
 unique_n_texts = set(i[0] for i in texts_t).union(set(i[1] for i in texts_t))
 unique_numbers = unique_n_calls.union(unique_n_texts)
 
-print(
-    f'There are {len(unique_numbers)} different telephone numbers in the records.')
+print(f"There are {len(unique_numbers)} different telephone numbers in the records.")

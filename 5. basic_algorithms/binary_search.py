@@ -129,7 +129,7 @@ test_list1 = [1, 3, 5, 7, 7, 7, 8, 11, 12, 13, 14, 15, 22, 22]
 assert _find_first(test_list1, 22) == 12
 
 
-# replication if _find_fast but increments by +1
+# replication if _find_last but increments by +1
 def _find_last(array, target):
     index = recursive_binary_search(array, target)
     if index == -1:

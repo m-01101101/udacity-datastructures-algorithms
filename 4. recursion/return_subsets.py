@@ -29,12 +29,13 @@ output =  [[],
            [9, 12, 15]]  # arr[len(arr)- len(arr): len(arr)]
 """
 
+
 def subsets(arr):
     """
     :param: arr - input integer array
     Return - list of lists (two dimensional array) where each list represents a subset
     """
-    
+
     # base condition
     if len(arr) == 1:
         # finalCompoundList.append(arr)
@@ -46,12 +47,12 @@ def subsets(arr):
         output = list()
         output.append(arr)
         # slice_arr = slice(0, len(arr) - (len(arr) - 1))
-        
+
         for i in range(len(arr)):
             output.append([arr[i]])  # add i element as list
             temp = arr.copy()
             temp.pop(i)
-            output.append(temp) # add array without i element as list
+            output.append(temp)  # add array without i element as list
             subsets(temp)
 
     return output

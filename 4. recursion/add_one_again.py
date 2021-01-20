@@ -24,33 +24,35 @@ def add_one(arr):
     :param: arr - list of digits representing some number x
     return a list with digits representing (x + 1)
     """
-    # Base case 
+    # Base case
     if arr == [9]:
         return [1, 0]
-    
+
     # A simple case, where we just need to increment the last digit
     if arr[-1] < 9:
         arr[-1] += 1
 
     # Case when the last digit is 9.
     else:
-        '''Recursive call'''
+        """Recursive call"""
         # We have used arr[:-1], that means all elements of the list except the last one.
         # Example, for original input arr=[1,2,9], we will pass [1,2] in next call.
         arr = add_one(arr[:-1]) + [0]
-        
+
     return arr
+
 
 # A helper function for Test Cases
 def test_function(test_case):
     arr = test_case[0]
     solution = test_case[1]
-    
+
     output = add_one(arr)
     for index, element in enumerate(output):
         if element != solution[index]:
             return print("Fail")
-    print("Pass") 
+    print("Pass")
+
 
 # Test Case 1
 arr = [0]

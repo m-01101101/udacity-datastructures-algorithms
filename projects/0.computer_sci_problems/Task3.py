@@ -2,7 +2,7 @@ from typing import Dict
 import re
 import csv
 
-with open('calls.csv', 'r') as f:
+with open("calls.csv", "r") as f:
     # columns = [calling telephone number(string),
     #           receiving telephone number(string),
     #           start timestamp of telephone call(string),
@@ -30,11 +30,13 @@ in Bangalore.
 
 The list of codes should be print out one per line in lexicographic order with no duplicates.   
 """
-area_codes = [re.split("[) ]", i[1].strip("(")) for i in calls_t if i[0].startswith('(080)')]
-area_codes_ = set([i[0] if i[0].startswith('0') else i[0][:4] for i in area_codes])
-area_codes_.add('140')  # i've assumed a telemarketer was called, should check
+area_codes = [
+    re.split("[) ]", i[1].strip("(")) for i in calls_t if i[0].startswith("(080)")
+]
+area_codes_ = set([i[0] if i[0].startswith("0") else i[0][:4] for i in area_codes])
+area_codes_.add("140")  # i've assumed a telemarketer was called, should check
 
-print('The numbers called by people in Bangalore have codes:')
+print("The numbers called by people in Bangalore have codes:")
 print(*sorted(area_codes_), sep="\n")
 
 """
@@ -46,6 +48,8 @@ were made to a number also starting with "(080)"?
 The percentage should have 2 decimal digits
 """
 
-Bang2Bang = len([i for i in area_codes if i[0] == '080'])*100 / len(area_codes)
+Bang2Bang = len([i for i in area_codes if i[0] == "080"]) * 100 / len(area_codes)
 
-print(f"{round(Bang2Bang,2)} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.")
+print(
+    f"{round(Bang2Bang,2)} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore."
+)

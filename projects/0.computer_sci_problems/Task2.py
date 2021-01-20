@@ -1,7 +1,7 @@
 from typing import Dict
 import csv
 
-with open('texts.csv', 'r') as f:
+with open("texts.csv", "r") as f:
     # columns = [sending telephone number(string),
     #           receiving telephone number(string),
     #           timestamp of text message(string)]
@@ -9,7 +9,7 @@ with open('texts.csv', 'r') as f:
     texts = list(reader)
     texts_t = sorted([tuple(i) for i in texts], key=lambda text: text[2])
 
-with open('calls.csv', 'r') as f:
+with open("calls.csv", "r") as f:
     # columns = [calling telephone number(string),
     #           receiving telephone number(string),
     #           start timestamp of telephone call(string),
@@ -32,8 +32,10 @@ for calls in calls_t:
     number_calltime[calls[0]] += float(calls[3])
     number_calltime[calls[1]] += float(calls[3])
 
-num_time = sorted(number_calltime.items(),
-               key=lambda num_time: num_time[1], reverse=True)
+num_time = sorted(
+    number_calltime.items(), key=lambda num_time: num_time[1], reverse=True
+)
 
 print(
-    f'{num_time[0][0]} spent the longest time, {num_time[0][1]} seconds, on the phone during September 2016.')
+    f"{num_time[0][0]} spent the longest time, {num_time[0][1]} seconds, on the phone during September 2016."
+)

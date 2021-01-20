@@ -13,6 +13,7 @@ Input: `[1, 2, [3, 4, 5], 4, 5]`
 Output: `[5, 4, [5, 4, 3], 2, 1]`
 """
 
+
 def deep_reverse(arr):
     output = []
 
@@ -23,6 +24,7 @@ def deep_reverse(arr):
             output.append(_)
 
     return output
+
 
 # cleaner solution, feels more pythonic?
 def _deep_reverse(arr):
@@ -39,12 +41,13 @@ def _deep_reverse(arr):
 def test_function(test_case):
     arr = test_case[0]
     solution = test_case[1]
-    
+
     output = deep_reverse(arr)
     if output == solution:
         return True
     else:
         return False
+
 
 arr = [1, 2, 3, 4, 5]
 solution = [5, 4, 3, 2, 1]
@@ -61,7 +64,7 @@ solution = [[[[6, 5], 4], 3, 2], 1]
 test_case = [arr, solution]
 assert test_function(test_case) == True
 
-arr =  [1, [2,3], 4, [5,6]]
-solution = [ [6,5], 4, [3, 2], 1]
+arr = [1, [2, 3], 4, [5, 6]]
+solution = [[6, 5], 4, [3, 2], 1]
 test_case = [arr, solution]
 assert test_function(test_case) == True

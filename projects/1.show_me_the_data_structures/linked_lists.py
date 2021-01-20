@@ -62,6 +62,7 @@ class LinkedList:
             node = node.next
         return out
 
+
 def union(llist_1: LinkedList, llist_2: LinkedList) -> LinkedList:
     """Combines elements of two Linked Lists without duplicates"""
     temp_list = set(llist_1.to_list() + llist_2.to_list())

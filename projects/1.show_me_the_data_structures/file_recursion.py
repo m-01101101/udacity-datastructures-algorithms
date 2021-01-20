@@ -28,7 +28,7 @@ def find_files(suffix: str, path: str) -> List[str]:
        a list of paths
     """
     if suffix == "":
-      raise ValueError("must provide suffix for file types to be returned")
+        raise ValueError("must provide suffix for file types to be returned")
 
     files = list()
     p = pathlib.Path(path)

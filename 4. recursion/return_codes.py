@@ -23,6 +23,7 @@ Note: you can assume that the input number will not contain any 0s
 
 from typing import List
 
+
 def translate_ascii(number):
     """
     Helper function to figure out alphabet of a particular number
@@ -31,14 +32,15 @@ def translate_ascii(number):
     """
     return chr(number + 96)
 
+
 def all_codes(number: int) -> List[str]:
     """
     :param: number - input integer
     Return - list() of all codes possible for this number
     """
-    
+
     if number == 0:
-        return ['']
+        return [""]
 
     # calculation for two right-most digits
     remainder = number % 100
@@ -46,10 +48,10 @@ def all_codes(number: int) -> List[str]:
     output100 = list()
     if remainder <= 26 and number > 9:
         output100 = all_codes(number // 100)
-        
+
         # translate number to ascii
         # must do this after calling recursive function, otherwise remainder reset
-        alphabet = translate_ascii(remainder) 
+        alphabet = translate_ascii(remainder)
         # cannot then append, as each character will be in the list alone
         # example: 'a', 'w'
         # must combine elements 'aw'
@@ -66,7 +68,7 @@ def all_codes(number: int) -> List[str]:
     # output10.append(get_alphabet(remainder))
     for index, element in enumerate(output10):
         output10[index] = element + alphabet
-    
+
     output = output10 + output100
 
     return output
