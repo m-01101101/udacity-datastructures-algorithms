@@ -5,16 +5,15 @@ def bubble_sort(arr: List[int]) -> List[int]:
     """sort array from smallest to largest"""
     n = len(arr)
     for iteration in range(n):
+        swapped = False
         for idx in range(1, n):
-            element = arr[idx]
-            prev = arr[idx - 1]
-
-            if prev <= element:
+            if arr[idx - 1] <= arr[idx]:
                 continue
-
             else:  # swap
-                arr[idx] = prev
-                arr[idx - 1] = element
+                swapped = True
+                arr[idx - 1], arr[idx] = arr[idx], arr[idx - 1]
+        if not swapped:
+            break  # stop iteration as arr sorted
     return arr
 
 
