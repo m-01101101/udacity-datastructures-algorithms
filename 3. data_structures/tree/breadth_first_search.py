@@ -22,20 +22,20 @@ class Queue:
         return len(self.q)
 
     def __repr__(self):
-        if len(self.q) > 0:
-            s = "<enqueue here>\n_________________\n"
-            s += "\n_________________\n".join([str(item) for item in self.q])
-            s += "\n_________________\n<dequeue here>"
-            return s
-        else:
+        if len(self.q) <= 0:
             return "<queue is empty>"
+
+        s = "<enqueue here>\n_________________\n"
+        s += "\n_________________\n".join(str(item) for item in self.q)
+        s += "\n_________________\n<dequeue here>"
+        return s
 
 
 # BFS algorithm
 # TODO - double check this works
 def bfs(tree: Tree) -> List[str]:
     """Return items in tree, following pre-order traversal"""
-    visit_order = list()
+    visit_order = []
     q = Queue()
     node = tree.get_root()
 

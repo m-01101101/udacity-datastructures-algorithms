@@ -25,16 +25,16 @@ class Queue:
         return len(self.q)
 
     def __repr__(self):
-        if len(self.q) > 0:
-            s = "<enqueue here>\n_________________\n"
-            s += "\n_________________\n".join([str(item) for item in self.q])
-            s += "\n_________________\n<dequeue here>"
-            return s
-        else:
+        if len(self.q) <= 0:
             return "<queue is empty>"
 
+        s = "<enqueue here>\n_________________\n"
+        s += "\n_________________\n".join(str(item) for item in self.q)
+        s += "\n_________________\n<dequeue here>"
+        return s
 
-visit_order = list()
+
+visit_order = []
 q = Queue()
 
 # start at the root

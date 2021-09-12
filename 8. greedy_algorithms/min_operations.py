@@ -38,15 +38,15 @@ def min_operations(target: int) -> int:
     output: number of steps (as an integer)
     """
     num_steps = 0
-    
+
     # start backwards from the target
     # if target is odd --> subtract 1
     # if target is even --> divide by 2
     while target != 0:
         if target % 2 == 0:
-            target = target // 2
+            target //= 2
 
         else:
-            target = target - 1
+            target -= 1
         num_steps += 1
     return num_steps

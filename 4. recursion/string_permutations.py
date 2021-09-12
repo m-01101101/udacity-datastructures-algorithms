@@ -43,29 +43,11 @@ def _string_permutations_attempt1(string: str) -> List[str]:
         sub_output = string_permutations_attempt1(alt_string)
 
         for sub_string in sub_output:
-            for i in range(len(sub_string) + 1):
+            for _ in range(len(sub_string) + 1):
                 character += sub_string
                 output.append(character)
 
     return output
-
-    """
-    output
-    ['cba',
-    'cbaba',
-    'cbababa',
-    'cbabababaa',
-    'cbabababaabaa',
-    'cbabababaabaabaa',
-    'cbabababaabaabaabaa']  # how am i getting a list of len 19?
-    
-    # should be getting six lists, not seven (3!)
-    # if i remove +1 from `range(len(sub_list) + 1)` I get an empty list
-        # the final recursion returns ['a'] so not sure why this happens
-
-    # sub_string += character, results in ['c', 'c', 'c', 'c']
-    # not clear why it returns only 4 strings
-    """
 
 
 def _string_permutations_attempt2(string: str) -> List[str]:
@@ -80,7 +62,7 @@ def _string_permutations_attempt2(string: str) -> List[str]:
 
         for sub_string in sub_output:
             print(f"substring is: {sub_string}, sub_output is: {sub_output}")
-            for i in range(len(string)):  # gives me correct length of output
+            for _ in range(len(string)):  # gives me correct length of output
                 character += sub_string
                 print(
                     f"substring is: {sub_string}, sub_output is: {sub_output}, character is {character}"
@@ -123,7 +105,7 @@ def _string_permutations_attempt3(string: str) -> List[str]:
         sub_output = string_permutations_attempt3(alt_string)
 
         for sub_string in sub_output:
-            for i in range(len(string)):  # gives me correct length of output
+            for _ in range(len(string)):  # gives me correct length of output
                 to_add = character.__add__(sub_string)
                 output.append(to_add)
 
@@ -185,7 +167,7 @@ def udacity_string_permutations(string):
 
 def return_permutations(string, index):
     # output to be returned
-    output = list()
+    output = []
 
     # Terminaiton / Base condition
     if index >= len(string):

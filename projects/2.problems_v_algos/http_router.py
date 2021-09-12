@@ -31,7 +31,7 @@ from typing import List
 
 class RouteTrieNode:
     def __init__(self, handler=None):
-        self.children = dict()
+        self.children = {}
         self.handler = handler
 
     def insert(self, part):

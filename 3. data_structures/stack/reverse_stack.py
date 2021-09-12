@@ -19,11 +19,9 @@ class Stack:
 
     def push(self, data):
         new_node = LinkedListNode(data)
-        if self.head is None:
-            self.head = new_node
-        else:
+        if self.head is not None:
             new_node.next = self.head
-            self.head = new_node
+        self.head = new_node
         self.num_elements += 1
 
     def pop(self):

@@ -19,8 +19,8 @@ with open("calls.csv", "r") as f:
     calls = list(reader)
     calls_t = sorted([tuple(i) for i in calls], key=lambda call: call[2])
 
-unique_n_calls = set(i[0] for i in calls_t).union(set(i[1] for i in calls_t))
-unique_n_texts = set(i[0] for i in texts_t).union(set(i[1] for i in texts_t))
+unique_n_calls = {i[0] for i in calls_t}.union({i[1] for i in calls_t})
+unique_n_texts = {i[0] for i in texts_t}.union({i[1] for i in texts_t})
 unique_numbers = unique_n_calls.union(unique_n_texts)
 """
 TASK 2: Which telephone number spent the longest time on the phone

@@ -89,15 +89,14 @@ def even_after_odd(head):
             else:  # <-- Append the current even node to the tail of EVEN sub-list
                 even_tail.next = current
                 even_tail = even_tail.next
-        else:
-            if (
+        elif (
                 odd_head is None
             ):  # <-- Make the current Node as the starting Node of ODD sub-list
-                odd_head = current
-                odd_tail = odd_head
-            else:  # <-- Append the current odd node to the tail of ODD sub-list
-                odd_tail.next = current
-                odd_tail = odd_tail.next
+            odd_head = current
+            odd_tail = odd_head
+        else:  # <-- Append the current odd node to the tail of ODD sub-list
+            odd_tail.next = current
+            odd_tail = odd_tail.next
         current.next = None
         current = next_node  # <-- Update "head" Node, for next iteration
 

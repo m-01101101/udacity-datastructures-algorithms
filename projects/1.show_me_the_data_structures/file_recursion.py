@@ -30,7 +30,7 @@ def find_files(suffix: str, path: str) -> List[str]:
     if suffix == "":
         raise ValueError("must provide suffix for file types to be returned")
 
-    files = list()
+    files = []
     p = pathlib.Path(path)
     files = [f for f in p.iterdir() if f.suffix == suffix and f.is_file()]
 

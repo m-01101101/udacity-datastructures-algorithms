@@ -56,7 +56,7 @@ def tower_of_Hanoi_func(num_disks, source, auxiliary, destination):
             auxiliary = destination + auxiliary
             print("D", "A") if len(destination) > 0 else None
             destination = []
-        elif num_disks % 2 == 0:
+        else:
             destination.append(source.pop())
             print("S", "D")
             destination = auxiliary + destination

@@ -2,7 +2,7 @@ class TrieNode:
     """represents a single node in the Trie"""
 
     def __init__(self):
-        self.children = dict()
+        self.children = {}
         self.is_word = False
 
     def insert(self, char: str):
@@ -11,7 +11,7 @@ class TrieNode:
 
     def suffixes(self, suffix=""):
         """Recursive function that collects the suffix for all complete words below this point"""
-        suffixes = list()
+        suffixes = []
 
         for char, node in self.children.items():
             if node.is_word:

@@ -47,12 +47,10 @@ def is_user_in_group(user: str, group: Group) -> bool:
     if user in group.get_users():
         return True
 
-    else:
-        groups = group.get_groups()
-        if len(groups) == 0:
-            return False
-        else:
-            for group in groups:
-                is_user_in_group(user, group)
+    groups = group.get_groups()
+    if len(groups) == 0:
+        return False
+    for group in groups:
+        is_user_in_group(user, group)
 
     return False

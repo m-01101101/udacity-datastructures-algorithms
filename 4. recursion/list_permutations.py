@@ -27,7 +27,7 @@ def list_permutations(inputList):
         for aList in sub_compoundList:
 
             # Permuted the `first_element` at all positions 0, 1, 2 ... len(aList) in each iteration
-            for j in range(0, len(aList) + 1):
+            for j in range(len(aList) + 1):
 
                 # A normal copy/assignment will change aList[j] element
                 bList = copy.deepcopy(aList)

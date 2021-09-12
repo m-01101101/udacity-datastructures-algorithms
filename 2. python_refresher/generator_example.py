@@ -9,7 +9,7 @@ def all_even():
 my_gen = all_even()
 
 # Generate the first 5 even numbers.
-for i in range(5):
+for _ in range(5):
     print(next(my_gen))
 
 # Now go and do some other processing.
@@ -20,5 +20,5 @@ print(do_something)
 print("\n")
 
 # Now go back to generating more even numbers.
-for i in range(20):
+for _ in range(20):
     print(next(my_gen))

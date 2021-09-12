@@ -22,10 +22,7 @@ class Person:
 
 def create_person_objects(names, ages, months):
     my_data = zip(names, ages, months)
-    person_objects = []
-    for item in my_data:
-        person_objects.append(Person(*item))
-    return person_objects
+    return [Person(*item) for item in my_data]
 
 
 def get_april_birthdays(people: list) -> dict:

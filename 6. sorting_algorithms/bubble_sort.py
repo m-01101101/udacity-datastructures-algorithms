@@ -4,14 +4,13 @@ from typing import List, Tuple
 def bubble_sort(arr: List[int]) -> List[int]:
     """sort array from smallest to largest"""
     n = len(arr)
-    for iteration in range(n):
+    for _ in range(n):
         swapped = False
         for idx in range(1, n):
             if arr[idx - 1] <= arr[idx]:
                 continue
-            else:  # swap
-                swapped = True
-                arr[idx - 1], arr[idx] = arr[idx], arr[idx - 1]
+            swapped = True
+            arr[idx - 1], arr[idx] = arr[idx], arr[idx - 1]
         if not swapped:
             break  # stop iteration as arr sorted
     return arr
@@ -45,17 +44,16 @@ assert list(sorted(wakeup_times)) == bubble_sort(wakeup_times)
 def bubble_sort2(arr: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
     """sort tuples from largest to smallest"""
     n = len(arr)
-    for iteration in range(n):
-        for idx in range(0, n - 1):
+    for _ in range(n):
+        for idx in range(n - 1):
             element = arr[idx]
             nxt = arr[idx + 1]
 
             if nxt[0] < element[0] or (nxt[0] == element[0] and nxt[1] <= element[1]):
                 continue
 
-            else:  # swap
-                arr[idx] = nxt
-                arr[idx + 1] = element
+            arr[idx] = nxt
+            arr[idx + 1] = element
     return arr
 
 

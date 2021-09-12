@@ -25,17 +25,16 @@ def maxSubArrayRecursive(arr, start, stop):
     if start == stop:
         return arr[start]
 
-    if start < stop:
-        mid = (start + stop) // 2  # Get the middle index
-        L = maxSubArrayRecursive(arr, start, mid)  # Recurse on the Left part
-        R = maxSubArrayRecursive(arr, mid + 1, stop)  # Recurse on the Right part
-        C = maxCrossingSum(
-            arr, start, mid, stop
-        )  # Find the max crossing sum w.r.t. middle index
-        return max(C, max(L, R))  # Return the maximum of (L,R,C)
-
-    else:  # If ever start > stop. Not feasible.
+    if start >= stop:  # If ever start > stop. Not feasible.
         return nums[start]
+
+    mid = (start + stop) // 2  # Get the middle index
+    L = maxSubArrayRecursive(arr, start, mid)  # Recurse on the Left part
+    R = maxSubArrayRecursive(arr, mid + 1, stop)  # Recurse on the Right part
+    C = maxCrossingSum(
+        arr, start, mid, stop
+    )  # Find the max crossing sum w.r.t. middle index
+    return max(C, max(L, R))  # Return the maximum of (L,R,C)
 
 
 def maxSubArray(arr):

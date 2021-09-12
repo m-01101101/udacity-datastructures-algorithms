@@ -16,8 +16,7 @@ then the pair `(i, j)` is called an inversion of `arr`.
 def count_inversions(arr):
     start_index = 0
     end_index = len(arr) - 1
-    output = inversion_count_func(arr, start_index, end_index)
-    return output
+    return inversion_count_func(arr, start_index, end_index)
 
 
 def inversion_count_func(arr, start_index, end_index):
@@ -57,13 +56,11 @@ def merge_two_sorted_halves(arr, start_one, end_one, start_two, end_two):
             left_index += 1
 
         else:
-            count = count + (
-                end_one - left_index + 1
-            )  # left > right hence it's an inversion
+            count += end_one - left_index + 1
             output_list[index] = arr[right_index]
             right_index += 1
 
-        index = index + 1
+        index += 1
 
         if left_index > end_one:
             for i in range(right_index, end_two + 1):

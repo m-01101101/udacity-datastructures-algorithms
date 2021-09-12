@@ -12,7 +12,7 @@ class Node(object):
 
 
 def grandparent(node):
-    if node.parent == None:
+    if node.parent is None:
         return None
     return node.parent.parent
 
@@ -21,7 +21,7 @@ def grandparent(node):
 def pibling(node):
     p = node.parent
     gp = grandparent(node)
-    if gp == None:
+    if gp is None:
         return None
     if p == gp.left:
         return gp.right
@@ -44,19 +44,17 @@ class RedBlackTree(object):
         if current.value < new_val:
             if current.right:
                 return self.insert_helper(current.right, new_val)
-            else:
-                current.right = Node(new_val, current, "red")
-                return current.right
+            current.right = Node(new_val, current, "red")
+            return current.right
         else:
             if current.left:
                 return self.insert_helper(current.left, new_val)
-            else:
-                current.left = Node(new_val, current, "red")
-                return current.left
+            current.left = Node(new_val, current, "red")
+            return current.left
 
     def rebalance(self, node):
         # case 1 root node
-        if node.parent == None:  # inserting the root node
+        if node.parent is None:  # inserting the root node
             return
 
         # case 2 parent is black
@@ -81,7 +79,7 @@ class RedBlackTree(object):
         gp = grandparent(node)
         # Small change, if there is no grandparent, cases 4 and 5
         # won't apply
-        if gp == None:
+        if gp is None:
             return
 
         # case 4, red parent, black pibling - inside case

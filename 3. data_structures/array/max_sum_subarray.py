@@ -26,9 +26,7 @@ def _max_sum_subarray1(arr: List[int]) -> int:
     return - number - largest sum in contiguous subarry within arr
     """
     running_total = 0
-    placeholder = []
-    placeholder.append(sum(arr))  # take into account total sum
-
+    placeholder = [sum(arr)]
     for i in arr:
         if i > 0:
             running_total += i

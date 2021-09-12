@@ -67,7 +67,7 @@ def udacity_equation_checker(equation):
         if char == "(":
             stack.push(char)
         elif char == ")":
-            if stack.pop() == None:
+            if stack.pop() is None:
                 return False
 
     return stack.size() == 0

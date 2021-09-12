@@ -30,11 +30,11 @@ def rearrange_digits(input_list: List[int]) -> List[int]:
     heapq._heapify_max(input_list)
     out1 = out2 = ""
 
-    for i in range(len(input_list) // 2):
+    for _ in range(len(input_list) // 2):
         out1 += str(heapq._heappop_max(input_list))
         out2 += str(heapq._heappop_max(input_list))
 
-    if len(input_list) > 0:
+    if input_list:
         out1 += str(heapq._heappop_max(input_list))
 
     return [int(out1), int(out2)]

@@ -49,10 +49,7 @@ def fastSelect(Arr: List[int], k: int):  # k is an index
 
 # Helper function
 def findMedian(Arr, start, size):
-    myList = []
-    for i in range(start, start + size):
-        myList.append(Arr[i])
-
+    myList = [Arr[i] for i in range(start, start + size)]
     # Sort the array
     myList.sort()
 

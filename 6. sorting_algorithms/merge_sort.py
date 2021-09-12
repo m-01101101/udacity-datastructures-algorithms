@@ -7,15 +7,14 @@ def mergesort(arr: List[int]) -> List[int]:
     if len(arr) <= 1:
         return arr
 
-    else:
-        mid_point = len(arr) // 2
-        left = arr[:mid_point]
-        right = arr[mid_point:]
+    mid_point = len(arr) // 2
+    left = arr[:mid_point]
+    right = arr[mid_point:]
 
-        left = mergesort(left)
-        right = mergesort(right)
+    left = mergesort(left)
+    right = mergesort(right)
 
-        return _merge(left, right)
+    return _merge(left, right)
 
 
 def _merge(left: List[int], right: List[int]) -> List[int]:

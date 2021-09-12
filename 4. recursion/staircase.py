@@ -28,15 +28,9 @@ def staircase(n):
     if n == 1:
         return 1
 
-    else:
-        output = 0
+    output = sum(n // (i % n) for i in range(1, n))
 
-        for i in range(1, n):
-            # output.append([i % n + 1] * (n + 1 // i))
-            # output.append([i % n] * (n // i))
-            output += n // (i % n)
-
-        staircase(n - 1)
+    staircase(n - 1)
 
     return output
 

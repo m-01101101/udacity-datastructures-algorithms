@@ -48,19 +48,8 @@ def udacity_duplicate_number(arr):
     expected_sum = 0 + 1 + 2 + 3 + .... + (n-2)
     current_sum - expected_sum = x
     """
-    current_sum = 0
-    expected_sum = 0
-
-    # Traverse the original array in the forward direction
-    for num in arr:
-        current_sum += num
-
-    # Traverse from 0 to (length of array-1) to get the expected_sum
-    # Alternatively, you can use the formula for sum of an Arithmetic Progression to get the expected_sum
-
-    # It means that if the array length = n, loop will run form 0 to (n-2)
-    for i in range(len(arr) - 1):
-        expected_sum += i
+    current_sum = sum(arr)
+    expected_sum = sum(range(len(arr) - 1))
 
     # The difference between the
     return current_sum - expected_sum

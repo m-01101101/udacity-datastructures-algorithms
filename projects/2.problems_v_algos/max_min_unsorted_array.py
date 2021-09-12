@@ -7,14 +7,14 @@ import random
 from typing import List, Tuple
 
 
-def get_min_max(ints: List[int]):  #  -> Tuple(int, int)
+def get_min_max(ints: List[int]):    #  -> Tuple(int, int)
     """
     Return a tuple(min, max) out of list of unsorted integers.
 
     Args:
        ints(list): list of integers containing one or more integers
     """
-    if len(ints) == 0:
+    if not ints:
         return None
 
     _min = _max = ints[0]
@@ -29,7 +29,7 @@ def get_min_max(ints: List[int]):  #  -> Tuple(int, int)
 
 
 # test case
-l = [i for i in range(0, 10)]
+l = [i for i in range(10)]
 random.shuffle(l)
 assert get_min_max(l) == (min(l), max(l))
 

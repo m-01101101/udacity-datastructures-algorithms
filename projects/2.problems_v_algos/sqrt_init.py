@@ -1,5 +1,5 @@
 def sqrt(number: int) -> int:
-    if number == 0 or number == 1:
+    if number in {0, 1}:
         return number
 
     low = 0

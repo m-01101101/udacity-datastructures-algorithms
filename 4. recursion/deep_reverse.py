@@ -20,7 +20,7 @@ def deep_reverse(arr):
     for _ in list(reversed(arr)):
         if type(_) == list:
             output.append(deep_reverse(_))
-        elif type(_) != list:
+        else:
             output.append(_)
 
     return output
@@ -30,12 +30,8 @@ def deep_reverse(arr):
 def _deep_reverse(arr):
     if type(arr) is not list:
         return arr
-    else:
-        results = []
-        arr = arr[::-1]  # more pythonic way to reverse
-        for element in arr:
-            results.append(deep_reverse(element))
-        return results
+    arr = arr[::-1]  # more pythonic way to reverse
+    return [deep_reverse(element) for element in arr]
 
 
 def test_function(test_case):
@@ -43,10 +39,7 @@ def test_function(test_case):
     solution = test_case[1]
 
     output = deep_reverse(arr)
-    if output == solution:
-        return True
-    else:
-        return False
+    return output == solution
 
 
 arr = [1, 2, 3, 4, 5]
