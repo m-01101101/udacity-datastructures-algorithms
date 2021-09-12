@@ -39,14 +39,11 @@ def coin_change_iterative(coins, amount):
     # when amount = 0, 0 number of coins will be needed for the change
     res[0] = 0
 
-    i = 0
-    while i < amount:
+    for i in range(amount):
         if res[i] != float("inf"):
             for coin in coins:
                 if i <= amount - coin:
                     res[i + coin] = min(res[i] + 1, res[i + coin])
-        i += 1
-
     if res[amount] == float("inf"):
         return -1
     return res[amount]

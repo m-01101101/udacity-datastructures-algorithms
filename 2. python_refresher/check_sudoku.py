@@ -36,14 +36,7 @@ def check_sudoku(square) -> bool:
         else:
             return False
 
-    square_pivoted = []
-    for _ in range(len(square[0])):
-        square_pivoted.append([i[_] for i in square])
-    # check columns
-    for i in square_pivoted:
-        if list(sorted(i)) == list(range(1, len(i) + 1)):
-            continue
-        else:
-            return False
-
-    return True
+    square_pivoted = [[i[_] for i in square] for _ in range(len(square[0]))]
+    return all(
+        list(sorted(i)) == list(range(1, len(i) + 1)) for i in square_pivoted
+    )

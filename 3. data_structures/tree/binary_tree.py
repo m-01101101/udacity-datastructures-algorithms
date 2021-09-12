@@ -42,7 +42,7 @@ class BinaryTree:
         # change comparison operator if new criteria required
         # adds to the right if larger than existing node, even if left available
         node = self.get_root()
-        if node == None:
+        if node is None:
             self.set_root(new_value)
             return
 
@@ -58,17 +58,18 @@ class BinaryTree:
                     node.set_value(new_value)
                     inserted = True
                 elif comparison == -1:
-                    if node.left != None:
-                        node = node.get_left_child()
-                    else:
+                    if node.left is None:
                         node.set_left_child(new_value)
                         inserted = True
-                elif comparison == 1:
-                    if node.right != None:
-                        node = node.get_right_child()
                     else:
+                        node = node.get_left_child()
+                elif comparison == 1:
+                    if node.right is None:
                         node.set_right_child(new_value)
                         inserted = True
+
+                    else:
+                        node = node.get_right_child()
 
     def insert_with_recursion(self, value):
         # recursive fills up left first
@@ -81,11 +82,11 @@ class BinaryTree:
             node = self.get_root()
 
         def add_recursively(node):
-            if node.left == None:
+            if node.left is None:
                 node = node.set_left_child(value)
             elif node.get_left_child().get_value() == value:
                 node = node.get_left_child().set_value(value)
-            elif node.right == None:
+            elif node.right is None:
                 node = node.set_right_child(value)
             elif node.get_right_child().get_value() == value:
                 node = node.get_right_child().set_value(value)
@@ -99,19 +100,18 @@ class BinaryTree:
         """takes a value, and returns true if a node containing that value exists in the tree, otherwise false"""
         if value == self.get_root().get_value():
             return True
-        else:
-            # TODO fix so that logic can handle left being not None and right being None
-            # try except? or would that get me in an infinite loop?
-            node_left = self.get_root().get_left_child()
-            node_right = self.get_root().get_right_child()
-            while node_left or node_right:
-                if node_left.get_value() == value:
-                    return True
-                if node_right.get_value() == value:
-                    return True
-                node_left = node_left.get_left_child()
-                node_right = node_right.get_right_child()
-            return False
+        # TODO fix so that logic can handle left being not None and right being None
+        # try except? or would that get me in an infinite loop?
+        node_left = self.get_root().get_left_child()
+        node_right = self.get_root().get_right_child()
+        while node_left or node_right:
+            if node_left.get_value() == value:
+                return True
+            if node_right.get_value() == value:
+                return True
+            node_left = node_left.get_left_child()
+            node_right = node_right.get_right_child()
+        return False
 
     # TODO - add delete functions
     # https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
@@ -120,31 +120,30 @@ class BinaryTree:
 
     def __repr__(self):
         # TODO print "<empty>" for each node's children
-        if self.get_root() == None:
+        if self.get_root() is None:
             return "Tree is empty"
 
-        else:
-            to_print = []
-            level = 0
-            node = self.get_root()
-            to_print.append((level, node))
-            while node:
-                level += 1
-                if node.has_left_child():
-                    to_print.append((level, node.get_left_child()))
-                if node.has_right_child():
-                    to_print.append((level, node.get_right_child()))
+        to_print = []
+        level = 0
+        node = self.get_root()
+        to_print.append((level, node))
+        while node:
+            level += 1
+            if node.has_left_child():
+                to_print.append((level, node.get_left_child()))
+            if node.has_right_child():
+                to_print.append((level, node.get_right_child()))
 
-                if node.has_left_child():
-                    node = node.get_left_child()
-                elif node.has_right_child():
-                    node = node.get_right_child()
-                else:
-                    node = None
+            if node.has_left_child():
+                node = node.get_left_child()
+            elif node.has_right_child():
+                node = node.get_right_child()
+            else:
+                node = None
         s = "Tree is made up of the following nodes:"  # TODO use rich or pprint
         previous_level = -1
-        for i in range(len(to_print)):
-            level, node = to_print[i]
+        for item in to_print:
+            level, node = item
             if level == previous_level:
                 s += " | " + str(node)
             else:

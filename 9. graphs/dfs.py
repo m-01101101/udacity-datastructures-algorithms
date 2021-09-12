@@ -36,7 +36,7 @@ def dfs_search_iterative(root_node, search_value):
     visited = set()  # Sets are faster for lookups
     stack = [root_node]  # Start with a given root node
 
-    while len(stack) > 0:  # Repeat until the stack is empty
+    while stack:  # Repeat until the stack is empty
 
         current_node = stack.pop()  # Pop out a node added recently
         visited.add(current_node)  # Mark it as visited

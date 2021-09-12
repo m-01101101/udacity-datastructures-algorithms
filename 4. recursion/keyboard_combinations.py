@@ -46,7 +46,7 @@ def get_characters(num):
 
 def keypad(num: int) -> List["str"]:
 
-    if num == None or num == 0:  # base case
+    if num is None or num == 0:  # base case
         return [""]
 
     elif num < 10:  # n is a single value
@@ -83,10 +83,7 @@ def keypad(num: int) -> List["str"]:
 
 
 def test_keypad(input, expected_output):
-    if sorted(keypad(input)) == expected_output:
-        return True
-    else:
-        return False
+    return sorted(keypad(input)) == expected_output
 
 
 # Base case: list with empty string

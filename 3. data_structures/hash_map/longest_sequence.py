@@ -15,10 +15,7 @@ from typing import List
 
 
 def longest_consecutive_subsequence(input_list: List[int]) -> List[int]:
-    tracking_dict = dict()
-    for index, value in enumerate(input_list):
-        tracking_dict[value] = index
-
+    tracking_dict = {value: index for index, value in enumerate(input_list)}
     start_index = max_len = -1
 
     for index, value in enumerate(input_list):
@@ -49,12 +46,7 @@ def udacity_longest_consecutive_subsequence(input_list):
     # Create a dictionary.
     # Each element of the input_list would become a "key", and
     # the corresponding index in the input_list would become the "value"
-    element_dict = dict()
-
-    # Traverse through the input_list, and populate the dictionary
-    # Time complexity = O(n)
-    for index, element in enumerate(input_list):
-        element_dict[element] = index
+    element_dict = {element: index for index, element in enumerate(input_list)}
 
     # Represents the length of longest subsequence
     max_length = -1

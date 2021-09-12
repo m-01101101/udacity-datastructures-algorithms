@@ -48,8 +48,4 @@ courses = {
 
 
 def when_offered(courses: dict, course: str) -> list:
-    result = []
-    for k, v in courses.items():
-        if course in v:
-            result.append(k)
-    return result
+    return [k for k, v in courses.items() if course in v]

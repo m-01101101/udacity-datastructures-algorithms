@@ -48,7 +48,7 @@ def fast_pair_sum_to_target(input_list, target):
     # Create a dictionary.
     # Each element of the input_list would become a "key", and
     # the corresponding index in the input_list would become the "value"
-    index_dict = dict()
+    index_dict = {}
 
     for index, element in enumerate(input_list):
 

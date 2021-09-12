@@ -9,7 +9,7 @@ fruit_tree.get_root().get_left_child().set_left_child("dates")
 # define a stack to keep track of the order of nodes we visit
 class Stack:
     def __init__(self):
-        self.list = list()
+        self.list = []
 
     def push(self, value):
         self.list.append(value)
@@ -24,17 +24,16 @@ class Stack:
         return len(self.list) == 0
 
     def __repr__(self):  # print the values in list in reverse order
-        if len(self.list) > 0:
-            s = "<top of stack>\n_________________\n"
-            s += "\n_________________\n".join([str(item) for item in self.list[::-1]])
-            s += "\n_________________\n<bottom of stack>"
-            return s
-
-        else:
+        if len(self.list) <= 0:
             return "<stack is empty>"
 
+        s = "<top of stack>\n_________________\n"
+        s += "\n_________________\n".join(str(item) for item in self.list[::-1])
+        s += "\n_________________\n<bottom of stack>"
+        return s
 
-visit_order = list()
+
+visit_order = []
 stack = Stack()
 
 # start at the root

@@ -7,10 +7,13 @@ def case_sort(string: str) -> str:
     Output: deeJRSfrsTUX
     """
     sorted_string = sorted(string)
-    lower_idx = min([i[0] for i in enumerate(sorted(string)) if 97 <= ord(i[1]) <= 122])
+    lower_idx = min(
+        i[0] for i in enumerate(sorted(string)) if 97 <= ord(i[1]) <= 122
+    )
+
     upper_idx = 0  # upper comes before lower, so we can assume 0
 
-    output = list()
+    output = []
     for e in string:
         if 97 <= ord(e) <= 122:
             output.append(sorted_string[lower_idx])

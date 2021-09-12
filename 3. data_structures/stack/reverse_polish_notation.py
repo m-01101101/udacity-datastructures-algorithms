@@ -35,11 +35,9 @@ class Stack:
 
     def push(self, data):
         new_node = LinkedListNode(data)
-        if self.head is None:
-            self.head = new_node
-        else:
+        if self.head is not None:
             new_node.next = self.head
-            self.head = new_node
+        self.head = new_node
         self.num_elements += 1
 
     def pop(self):
@@ -85,7 +83,7 @@ def evaluate_post_fix(input_list: List[str]) -> int:
 
     answer = 0
     for b in input_list:
-        if b in operators.keys():
+        if b in operators:
             y = stack.pop()
             x = stack.pop()  # be aware of the reverse order, impacts division
 

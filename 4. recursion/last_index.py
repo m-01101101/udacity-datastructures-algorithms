@@ -21,14 +21,10 @@ def last_index(arr: List[int], target: int) -> int:
     if target not in arr:
         return -1
 
-    else:
-        rev_arr = arr[:][::-1]
-        location = len(arr) - 1
-        if rev_arr[0] == target:
-            return location
-        else:
-            location -= 1
-            # need the return
-            return last_index(arr[slice(0, len(arr) - 1)], target)
-
-    return location
+    rev_arr = arr[:][::-1]
+    location = len(arr) - 1
+    if rev_arr[0] == target:
+        return location
+    location -= 1
+    # need the return
+    return last_index(arr[slice(0, len(arr) - 1)], target)

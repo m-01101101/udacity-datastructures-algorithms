@@ -37,14 +37,7 @@ testDaysBetweenDates()
 
 
 def isLeapYear(year):
-    if year % 400 == 0:
-        return True
-    elif year % 100 == 0:
-        return False
-    elif year % 4 == 0:
-        return True
-    else:
-        return False
+    return year % 400 == 0 or year % 100 != 0 and year % 4 == 0
 
 
 def daysInMonth(year, month):
@@ -63,11 +56,10 @@ def nextDay(year, month, day):
     """Simple version: assume every month has 30 days"""
     if day < daysInMonth(year, month):
         return year, month, day + 1
+    if month == 12:
+        return year + 1, 1, 1
     else:
-        if month == 12:
-            return year + 1, 1, 1
-        else:
-            return year, month + 1, 1
+        return year, month + 1, 1
 
 
 def daysBetweenDates__(year1, month1, day1, year2, month2, day2):
@@ -93,7 +85,7 @@ def test():
     for (args, answer) in test_cases:
         result = daysBetweenDates__(*args)
         if result != answer:
-            print(f"Test with data:", {args}, "failed")
+            print('Test with data:', {args}, "failed")
         else:
             print("Test case passed!")
 
@@ -140,7 +132,7 @@ def test():
     for (args, answer) in test_cases:
         result = daysBetweenDates(*args)
         if result != answer:
-            print(f"Test with data:", {args}, "failed")
+            print('Test with data:', {args}, "failed")
         else:
             print("Test case passed!")
 

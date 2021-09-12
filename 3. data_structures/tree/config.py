@@ -46,28 +46,27 @@ class Tree:
         if self.get_root() is None:
             return "Tree is empty"
 
-        else:
-            to_print = []
-            level = 0
-            node = self.get_root()
-            to_print.append((level, node))
-            while node:
-                level += 1
-                if node.has_left_child():
-                    to_print.append((level, node.get_left_child()))
-                if node.has_right_child():
-                    to_print.append((level, node.get_right_child()))
+        to_print = []
+        level = 0
+        node = self.get_root()
+        to_print.append((level, node))
+        while node:
+            level += 1
+            if node.has_left_child():
+                to_print.append((level, node.get_left_child()))
+            if node.has_right_child():
+                to_print.append((level, node.get_right_child()))
 
-                if node.has_left_child():
-                    node = node.get_left_child()
-                elif node.has_right_child():
-                    node = node.get_right_child()
-                else:
-                    node = None
+            if node.has_left_child():
+                node = node.get_left_child()
+            elif node.has_right_child():
+                node = node.get_right_child()
+            else:
+                node = None
         s = "Tree is made up of the following nodes:"  # TODO use rich or pprint
         previous_level = -1
-        for i in range(len(to_print)):
-            level, node = to_print[i]
+        for item in to_print:
+            level, node = item
             if level == previous_level:
                 s += " | " + str(node)
             else:
@@ -95,8 +94,7 @@ class State(object):
         self.visited_right = True
 
     def __repr__(self):
-        s = f"""{self.node}
+        return f"""{self.node}
         visited_left = {self.visited_left}
         visited_right = {self.visited_right}
         """
-        return s

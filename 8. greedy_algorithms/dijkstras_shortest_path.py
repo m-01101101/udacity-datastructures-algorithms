@@ -34,7 +34,7 @@ def dijkstra(graph, source):
     # Declare and initialize result, unvisited, and path
     result = {i: sys.maxsize if i != source else 0 for i in graph.nodes}  # placeholder, by default set distance to maxsize
 
-    path = dict()
+    path = {}
 
     unvisited = set(graph.nodes)
 
@@ -42,15 +42,12 @@ def dijkstra(graph, source):
         min_node = None
         # Find the unvisited node having smallest known distance from the source node.
         for node in unvisited:
-            if min_node is None:  # base case
+            if min_node is None or result[node] < result[min_node]:  # base case
                 min_node = node
-            elif result[node] < result[min_node]:
-                min_node = node  # switch the nodes, so start with source, then next lowest...
-
             """tried to be fancy"""
-            # d = {i[0][1]: i[1] for i in graph.distances.items() if i[0][0] == node}
-            # min_node = min(d, key=d.get)
-            # result[min_node] = d[min_node]
+                    # d = {i[0][1]: i[1] for i in graph.distances.items() if i[0][0] == node}
+                    # min_node = min(d, key=d.get)
+                    # result[min_node] = d[min_node]
 
         current_distance = result[min_node]
 
@@ -61,13 +58,12 @@ def dijkstra(graph, source):
         for neighbour in graph.neighbours[min_node]:
             if neighbour in unvisited:
                 distance = current_distance + graph.distances[(min_node, neighbour)]
-
             # If the calculated distance of the unvisited neighbour is less than the already known distance in result dictionary,
             # update the shortest distance in the result dictionary.        
                 if distance < result[neighbour]:
                     result[neighbour] = distance
                     path[neighbour] = min_node
-                    
+
         # Remove the current node from the unvisited set.
         unvisited.remove(min_node)
 

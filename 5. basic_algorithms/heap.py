@@ -8,7 +8,8 @@ class Heap:
 
     def __repr__(self) -> str:
         return "".join(
-            [f"idx: {i[0]} " f"value: {i[1]}\n" for i in list(enumerate(self.storage))]
+            f"idx: {i[0]} " f"value: {i[1]}\n"
+            for i in list(enumerate(self.storage))
         )
 
     def _heapify_up(self):

@@ -50,11 +50,9 @@ class Stack:
 
     def push(self, data):
         new_node = LinkedListNode(data)
-        if self.head is None:
-            self.head = new_node
-        else:
+        if self.head is not None:
             new_node.next = self.head
-            self.head = new_node
+        self.head = new_node
         self.num_elements += 1
 
     def pop(self):
@@ -84,17 +82,13 @@ def udacity_minimum_bracket_reversals(input_string):
     stack = Stack()
     count = 0
     for bracket in input_string:
-        if stack.is_empty():
-            stack.push(bracket)
-        else:
+        if not stack.is_empty():
             top = stack.top()
-            if top != bracket:
-                if top == "{":
-                    stack.pop()
-                    continue
-            stack.push(bracket)
-
-    ls = list()
+            if top != bracket and top == "{":
+                stack.pop()
+                continue
+        stack.push(bracket)
+    ls = []
     while not stack.is_empty():
         first = stack.pop()
         second = stack.pop()

@@ -41,18 +41,16 @@ def subsets(arr):
         # finalCompoundList.append(arr)
         return [arr]
 
-    else:
         # must results final output after else statement
         # otherwise it resets on final recursion call
-        output = list()
-        output.append(arr)
-        # slice_arr = slice(0, len(arr) - (len(arr) - 1))
+    output = [arr]
+    # slice_arr = slice(0, len(arr) - (len(arr) - 1))
 
-        for i in range(len(arr)):
-            output.append([arr[i]])  # add i element as list
-            temp = arr.copy()
-            temp.pop(i)
-            output.append(temp)  # add array without i element as list
-            subsets(temp)
+    for i in range(len(arr)):
+        output.append([arr[i]])  # add i element as list
+        temp = arr.copy()
+        temp.pop(i)
+        output.append(temp)  # add array without i element as list
+        subsets(temp)
 
     return output

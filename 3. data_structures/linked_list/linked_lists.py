@@ -105,8 +105,6 @@ class LinkedList:
 
         raise ValueError("Value not found in the list.")
 
-        return None
-
     # ----------------------------------------------------#
 
     def remove(self, value):

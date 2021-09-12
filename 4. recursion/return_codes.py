@@ -45,7 +45,7 @@ def all_codes(number: int) -> List[str]:
     # calculation for two right-most digits
     remainder = number % 100
     # must initialise after calc remainder, but before if statement
-    output100 = list()
+    output100 = []
     if remainder <= 26 and number > 9:
         output100 = all_codes(number // 100)
 
@@ -69,6 +69,4 @@ def all_codes(number: int) -> List[str]:
     for index, element in enumerate(output10):
         output10[index] = element + alphabet
 
-    output = output10 + output100
-
-    return output
+    return output10 + output100

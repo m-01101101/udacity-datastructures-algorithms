@@ -42,7 +42,7 @@ def nth_row_pascal(n: int) -> List[int]:
     # should be taking into account whether odd or even
 
     filler = (n ** 2 - 2) / (len(nth_row) - 2)
-    for i in nth_row[1 : (len(nth_row) - 1)]:
+    for i in nth_row[1:-1]:
         nth_row[i] = filler
 
     return nth_row

@@ -19,7 +19,7 @@ def fact_gen():
 # Test block
 my_gen = fact_gen()
 num = 5
-for i in range(num):
+for _ in range(num):
     print(next(my_gen))
 
 # Correct result when num = 5:

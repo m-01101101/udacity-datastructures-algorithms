@@ -13,7 +13,7 @@ class Node:
         self.next = None
 
     def __repr__(self):
-        return f"Node({str(self.value)})"
+        return f'Node({self.value})'
 
 
 # User defined class
@@ -86,18 +86,16 @@ def udacity_merge(list1, list2):
     list1_elt = list1.head
     list2_elt = list2.head
     while list1_elt is not None or list2_elt is not None:
-        if list1_elt is None:
+        if (
+            list1_elt is None
+            or list2_elt is not None
+            and list1_elt.value > list2_elt.value
+        ):
             merged.append(list2_elt)
             list2_elt = list2_elt.next
-        elif list2_elt is None:
-            merged.append(list1_elt)
-            list1_elt = list1_elt.next
-        elif list1_elt.value <= list2_elt.value:
-            merged.append(list1_elt)
-            list1_elt = list1_elt.next
         else:
-            merged.append(list2_elt)
-            list2_elt = list2_elt.next
+            merged.append(list1_elt)
+            list1_elt = list1_elt.next
     return merged
 
 

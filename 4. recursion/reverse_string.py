@@ -18,10 +18,9 @@ def udacity_reverse_string(input):
     if len(input) == 0:
         return ""
 
-    else:
-        first_char = input[0]
+    first_char = input[0]
 
-        """
+    """
         The `slice()` function can accept upto the following three arguments.
         - start: [OPTIONAL] starting index. Default value is 0.
         - stop: ending index (exclusive)
@@ -29,10 +28,10 @@ def udacity_reverse_string(input):
         
         The return type of `slice()` function is an object of class 'slice'. 
         """
-        the_rest = slice(1, None)  # `the_rest` is an object of type 'slice' class
-        sub_string = input[the_rest]  # convert the `slice` object into a list
+    the_rest = slice(1, None)  # `the_rest` is an object of type 'slice' class
+    sub_string = input[the_rest]  # convert the `slice` object into a list
 
-        # Recursive call
-        reversed_substring = reverse_string(sub_string)
+    # Recursive call
+    reversed_substring = reverse_string(sub_string)
 
-        return reversed_substring + first_char
+    return reversed_substring + first_char

@@ -47,16 +47,13 @@ class BlockChain:
         ts = time.gmtime()
         if self.head is None:
             self.head = self.tail = Block(ts, data, None)  # genesis block
-            self.size += 1
-
         elif self.tail is None:
             self.tail = Block(ts, data, self.head)
-            self.size += 1
-
         else:
             new_block = Block(ts, data, self.tail)
             self.tail = new_block
-            self.size += 1
+
+        self.size += 1
 
     def size(self) -> int:
         return self.size

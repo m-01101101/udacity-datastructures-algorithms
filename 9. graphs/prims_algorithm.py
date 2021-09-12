@@ -126,7 +126,7 @@ def minimum_cost(graph):
     minHeap = [(0, start_vertex)]
     total_cost = 0
 
-    while len(minHeap) > 0:
+    while minHeap:
         # Here, heapq.heappop() will automatically pop out the "node" having smallest edge_cost, and reduce the heap size
         cost, current_vertex = heapq.heappop(minHeap)
 

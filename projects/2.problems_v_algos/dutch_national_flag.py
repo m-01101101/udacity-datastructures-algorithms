@@ -17,8 +17,8 @@ def sort_012(input_list: List[int]) -> List[int]:
     Args:
        input_list(list): List to be sorted
     """
-    L0 = list()
-    L1 = list()
+    L0 = []
+    L1 = []
     L2 = list()
 
     for e in input_list:

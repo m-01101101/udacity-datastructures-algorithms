@@ -40,7 +40,7 @@ def shortest_path(M: Map, start: int, goal: int) -> List[int]:
     )  # placeholder to tracking minimum cost to goal for paths that include the goal node
     _short_path = None  # placeholder for list of nodes representing short path
     visited = set()
-    paths = list()
+    paths = []
     path = Path([start], 0, start_to_fin, start)
     heapq.heappush(paths, path)
     visited.add(start)

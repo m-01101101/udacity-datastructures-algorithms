@@ -59,8 +59,7 @@ class HashMap:
         return None
 
     def get_bucket_index(self, key):
-        bucket_index = self.get_hash_code(key)
-        return bucket_index
+        return self.get_hash_code(key)
 
     def get_hash_code(self, key):
         key = str(key)
@@ -69,11 +68,9 @@ class HashMap:
         hash_code = 0
         for character in key:
             hash_code += ord(character) * current_coefficient
-            hash_code = hash_code % num_buckets  # compress hash_code
+            hash_code %= num_buckets
             current_coefficient *= self.p
-            current_coefficient = (
-                current_coefficient % num_buckets
-            )  # compress coefficient
+            current_coefficient %= num_buckets
 
         return hash_code % num_buckets  # one last compression before returning
 

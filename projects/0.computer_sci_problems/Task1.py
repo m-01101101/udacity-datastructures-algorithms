@@ -23,8 +23,8 @@ TASK 1:
 How many different telephone numbers are there in the records? 
 """
 
-unique_n_calls = set(i[0] for i in calls_t).union(set(i[1] for i in calls_t))
-unique_n_texts = set(i[0] for i in texts_t).union(set(i[1] for i in texts_t))
+unique_n_calls = {i[0] for i in calls_t}.union({i[1] for i in calls_t})
+unique_n_texts = {i[0] for i in texts_t}.union({i[1] for i in texts_t})
 unique_numbers = unique_n_calls.union(unique_n_texts)
 
 print(f"There are {len(unique_numbers)} different telephone numbers in the records.")

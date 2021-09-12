@@ -79,7 +79,7 @@ def intersection(llist_1: LinkedList, llist_2: LinkedList) -> LinkedList:
     a = llist_1.to_list()
     b = llist_2.to_list()
 
-    temp_set = set(x for x in a if x in b)
+    temp_set = {x for x in a if x in b}
 
     ll_union = LinkedList()
     for i in temp_set:

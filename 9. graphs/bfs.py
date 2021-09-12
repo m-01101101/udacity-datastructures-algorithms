@@ -31,7 +31,7 @@ def bfs_search(root_node, search_value):
     visited = set()  # Sets are faster while lookup. Lists are faster to iterate.
     queue = [root_node]
 
-    while len(queue) > 0:
+    while queue:
         current_node = queue.pop(0)
         visited.add(current_node)
 

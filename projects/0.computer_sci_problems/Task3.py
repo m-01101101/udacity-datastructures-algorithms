@@ -33,7 +33,7 @@ The list of codes should be print out one per line in lexicographic order with n
 area_codes = [
     re.split("[) ]", i[1].strip("(")) for i in calls_t if i[0].startswith("(080)")
 ]
-area_codes_ = set([i[0] if i[0].startswith("0") else i[0][:4] for i in area_codes])
+area_codes_ = {i[0] if i[0].startswith("0") else i[0][:4] for i in area_codes}
 area_codes_.add("140")  # i've assumed a telemarketer was called, should check
 
 print("The numbers called by people in Bangalore have codes:")

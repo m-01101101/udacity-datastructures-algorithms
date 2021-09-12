@@ -136,12 +136,9 @@ class HuffmanEncoder:
         return codes
 
     def encode(self, data):
-        encoded_text = ""
         codes = self.generate_codes()
 
-        for char in data:
-            encoded_text += codes[char]
-        return encoded_text
+        return "".join(codes[char] for char in data)
 
     def decode(self, encoded_data: str, tree) -> str:
         decoded_text = ""
@@ -149,11 +146,7 @@ class HuffmanEncoder:
         current_node = tree
 
         for char in encoded_data:
-            if char == "0":
-                current_node = current_node.left
-            else:
-                current_node = current_node.right
-
+            current_node = current_node.left if char == "0" else current_node.right
             if current_node.char is not None:
                 decoded_text += current_node.char
                 current_node = tree

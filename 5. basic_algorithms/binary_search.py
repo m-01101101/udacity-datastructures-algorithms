@@ -137,12 +137,10 @@ def _find_last(array, target):
     while array[index] == target:
         if index == 0:
             return 0
-        elif index == len(array) - 1:  # added to handle IndexError
+        elif index == len(array) - 1 or array[index + 1] != target:  # added to handle IndexError
             return index
-        elif array[index + 1] == target:
-            index += 1
         else:
-            return index
+            index += 1
 
 
 assert _find_last(multiple, 7) == 5
@@ -160,7 +158,7 @@ but with no information about the location of that element
 
 
 def contains(array, target):
-    return True if recursive_binary_search(array, target) != -1 else False
+    return recursive_binary_search(array, target) != -1
 
 
 letters = ["a", "c", "d", "f", "g"]

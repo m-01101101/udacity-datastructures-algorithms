@@ -63,9 +63,7 @@ def dijkstra(graph, start_node, end_node):
             if edge.node in distance_dict:
 
                 distance_to_neighbour = node_distance + edge.distance
-                if distance_dict[edge.node] > distance_to_neighbour:
-                    distance_dict[edge.node] = distance_to_neighbour
-
+                distance_dict[edge.node] = min(distance_dict[edge.node], distance_to_neighbour)
     return shortest_distance[end_node]
 
 

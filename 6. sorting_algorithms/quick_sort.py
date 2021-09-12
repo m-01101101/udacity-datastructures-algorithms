@@ -55,7 +55,7 @@ def quick_sort(collection: List) -> List:
 
     pivot = collection.pop()
     greater = list()
-    lesser = list()
+    lesser = []
 
     for element in collection:
         (greater if element > pivot else lesser).append(element)
